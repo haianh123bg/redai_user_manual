@@ -1,201 +1,208 @@
-## Mở khu vực Danh sách Bảng dữ liệu và Phân loại Danh mục
+## Mở khu vực Quản lý Bảng dữ liệu và Phân loại Danh mục
 
-Để bắt đầu quản lý dữ liệu động, khởi tạo bảng mới, phân nhóm danh mục và quản lý vòng đời dữ liệu trên **RedAI Database**, bạn truy cập vào đường dẫn sau trên thanh điều hướng bên trái của hệ thống **RedAI**:
+Để quản lý cơ sở dữ liệu động, khởi tạo bảng mới và tổ chức phân loại theo danh mục trên **RedAI Database**, người dùng truy cập từ giao diện làm việc chính theo các bước:
 
-1. **Danh sách Bảng dữ liệu (`/database`)**: Không gian quản trị trung tâm của toàn bộ các bảng dữ liệu (Dynamic Tables) trong Không gian làm việc (Workspace) hiện tại. Màn hình được chia làm 2 khu vực chính:
-   - **Thanh bên trái (Bảng phân loại danh mục - Categories Sidebar)**:
-     - <img src="https://api.iconify.design/lucide:layout-grid.svg?color=%23ff3333" width="16" alt="" /> **Tất cả bảng**: Xem toàn bộ các bảng dữ liệu đang có trong không gian làm việc.
-     - <img src="https://api.iconify.design/lucide:folder.svg?color=%23ff3333" width="16" alt="" /> **Chưa phân loại**: Gom các bảng dữ liệu chưa được gán vào bất kỳ danh mục tùy chỉnh nào.
-     - **Danh mục tùy chỉnh (Collection Categories)**: Danh sách các nhóm bảng do người dùng tự định nghĩa (ví dụ: `Bán hàng`, `Nhân sự`, `Kho vận`, `Chăm sóc khách hàng`). Mỗi danh mục đi kèm nút thao tác <img src="https://api.iconify.design/lucide:more-vertical.svg?color=%23ff3333" width="16" alt="" /> **(Thao tác)** để đổi tên hoặc xóa nhóm.
-     - Nút <img src="https://api.iconify.design/lucide:plus.svg?color=%23ff3333" width="16" alt="" /> **Thêm danh mục mới**: Khởi tạo một nhóm danh mục mới để tổ chức bảng khoa học.
-     - <img src="https://api.iconify.design/lucide:cpu.svg?color=%23ff3333" width="16" alt="" /> **Bảng hệ thống**: Khu vực dành cho các bảng dữ liệu cấu hình lõi của hệ thống RedAI.
-     - <img src="https://api.iconify.design/lucide:trash-2.svg?color=%23ff3333" width="16" alt="" /> **Thùng rác**: Nơi lưu trữ các bảng dữ liệu đã bị xóa tạm thời với cơ chế đếm ngược lưu trữ an toàn trong vòng **10 ngày** trước khi tự động dọn dẹp vĩnh viễn.
-   - **Khu vực hiển thị danh sách bảng (Main Content Area)**:
-     - **Thanh công cụ phía trên (Toolbar)**:
-       - Ô tìm kiếm <img src="https://api.iconify.design/lucide:search.svg?color=%23ff3333" width="16" alt="" /> **(Tìm kiếm bảng dữ liệu...)**.
-       - Nút thả xuống <img src="https://api.iconify.design/lucide:plus.svg?color=%23ff3333" width="16" alt="" /> **Tạo Bảng Mới**: Mở menu 4 phương án tạo bảng (Tạo bảng trống, Hỏi AI Dynamic Table Blueprint, Nhân bản bảng, Import dữ liệu).
-       - Nút <img src="https://api.iconify.design/lucide:refresh-cw.svg?color=%23ff3333" width="16" alt="" /> **(Làm mới)**: Tải lại toàn bộ dữ liệu danh sách bảng.
-       - Nút tiện ích mở rộng <img src="https://api.iconify.design/lucide:more-vertical.svg?color=%23ff3333" width="16" alt="" /> **(Tiện ích nâng cao)**:
-         - <img src="https://api.iconify.design/lucide:list.svg?color=%23ff3333" width="16" alt="" /> **Tập hợp tùy chọn (Option Sets)**: Chuyển sang trang quản lý các bộ giá trị lựa chọn dùng chung (`/database/option-sets`).
-         - <img src="https://api.iconify.design/lucide:git-fork.svg?color=%23ff3333" width="16" alt="" /> **Đồ thị quan hệ (Relations ERD)**: Chuyển sang trang sơ đồ trực quan quan hệ giữa các bảng (`/database/relations`).
-         - <img src="https://api.iconify.design/lucide:database.svg?color=%23ff3333" width="16" alt="" /> **Nguồn dữ liệu ngoại bộ (Sources)**: Quản lý các kết nối cơ sở dữ liệu bên ngoài (`/database/sources`).
-         - <img src="https://api.iconify.design/lucide:hard-drive.svg?color=%23ff3333" width="16" alt="" /> **Dung lượng lưu trữ (Storage Usage)**: Mở hộp thoại kiểm tra số lượng bản ghi, dung lượng tệp đính kèm và tổng dung lượng bảng.
-         - <img src="https://api.iconify.design/lucide:sparkles.svg?color=%23ff3333" width="16" alt="" /> **Trung tâm tiện ích (Utilities Center)**: Mở bộ công cụ quét bản ghi trùng lặp, tạo dữ liệu giả lập (Mock Data), in nhãn QR Code và trích xuất dữ liệu tự động.
-2. **Thao tác trên từng thẻ bảng dữ liệu**: Mỗi bảng hiển thị tên bảng, mô tả, số lượng bản ghi, số lượng trường và menu chức năng <img src="https://api.iconify.design/lucide:more-horizontal.svg?color=%23ff3333" width="16" alt="" />:
-   - <img src="https://api.iconify.design/lucide:edit-2.svg?color=%23ff3333" width="16" alt="" /> **Đổi tên & Mô tả bảng**: Cập nhật thông tin nhận diện bảng.
-   - <img src="https://api.iconify.design/lucide:folder-input.svg?color=%23ff3333" width="16" alt="" /> **Di chuyển danh mục**: Đổi nhóm danh mục quản lý cho bảng.
-   - <img src="https://api.iconify.design/lucide:copy.svg?color=%23ff3333" width="16" alt="" /> **Nhân bản bảng**: Sao chép cấu trúc hoặc dữ liệu bảng sang bảng mới.
-   - <img src="https://api.iconify.design/lucide:download.svg?color=%23ff3333" width="16" alt="" /> **Tải tài liệu API (OpenAPI JSON)**: Tải tệp đặc tả kỹ thuật REST API của riêng bảng này.
-   - <img src="https://api.iconify.design/lucide:folder-sync.svg?color=%23ff3333" width="16" alt="" /> **Chuyển hóa thành Tool & MCP**: Xuất bản tự động toàn bộ API CRUD của bảng thành bộ công cụ tùy chỉnh (Custom Tools) và máy chủ MCP để AI Agent gọi trực tiếp.
-   - <img src="https://api.iconify.design/lucide:trash-2.svg?color=%23ff3333" width="16" alt="" /> **Xóa bảng (Chuyển vào thùng rác)**: Đưa bảng vào danh sách lưu trữ tạm thời trong 10 ngày.
+| Bước | Thao tác trên giao diện | Chi tiết hiển thị |
+| :--- | :--- | :--- |
+| **1. Chọn Không gian làm việc** | Nhấp vào menu chuyển đổi ở góc trên bên trái màn hình. | Chọn đúng **Workspace** và **Base** đang làm việc để quản trị dữ liệu tương ứng. |
+| **2. Truy cập phân hệ Database** | Tại màn hình **Trang chủ**, nhấp vào thẻ dịch vụ **Database**. | Thẻ có mô tả *"Hệ thống Low-code Database thế hệ mới tạo và quản lý bảng dữ liệu, tự động hóa quy trình dữ liệu cho AI Agent"*. Thanh điều hướng hiển thị đường dẫn breadcrumb: `Trang chủ > Database`. |
+
+---
+
+### Bố cục không gian làm việc Database
+
+Màn hình làm việc trung tâm được chia làm 2 khu vực chức năng chính:
+
+| Khu vực | Thành phần giao diện | Chức năng chi tiết |
+| :--- | :--- | :--- |
+| **Thanh bên trái (Danh mục)** | Nút <img src="https://api.iconify.design/lucide:plus.svg?color=%23ff3333" width="16" alt="" /> **Thêm danh mục mới** | Nằm cạnh tiêu đề `Danh mục`, mở hộp thoại khởi tạo nhóm danh mục phân loại mới. |
+| | <img src="https://api.iconify.design/lucide:layout-list.svg?color=%23ff3333" width="16" alt="" /> **Tất cả bảng người dùng tạo** | Mục mặc định ở trên cùng, hiển thị toàn bộ các bảng do người dùng tạo trong cơ sở dữ liệu. |
+| | **Danh mục tùy chỉnh** (Biểu tượng thư mục) | Danh sách các nhóm do người dùng tự đặt tên. Rê chuột vào tên danh mục sẽ hiển thị 2 biểu tượng thao tác nhanh: <img src="https://api.iconify.design/lucide:pencil.svg?color=%23ff3333" width="16" alt="" /> **(Chỉnh sửa tên danh mục)** và <img src="https://api.iconify.design/lucide:trash-2.svg?color=%23ff3333" width="16" alt="" /> **(Xóa danh mục)**. |
+| | <img src="https://api.iconify.design/lucide:folder.svg?color=%23ff3333" width="16" alt="" /> **Chưa có Category** | Tập hợp các bảng dữ liệu chưa được gắn vào bất kỳ nhóm danh mục nào. |
+| | <img src="https://api.iconify.design/lucide:shield.svg?color=%23ff3333" width="16" alt="" /> **Tất cả bảng hệ thống** | Nhóm các bảng dữ liệu hệ thống của Workspace, đi kèm các phân nhóm mặc định: `Email Marketing`, `Zalo`, `Đối tượng`... |
+| **Khu vực hiển thị danh sách bảng (Bên phải)** | **Thanh công cụ phía trên (Toolbar)** | • <img src="https://api.iconify.design/lucide:search.svg?color=%23ff3333" width="16" alt="" /> **Tìm kiếm**: Tìm nhanh bảng theo tên.<br>• <img src="https://api.iconify.design/lucide:plus.svg?color=%23ff3333" width="16" alt="" /> **Tạo bảng** (Nút màu đỏ): Mở hộp thoại khởi tạo bảng dữ liệu mới.<br>• <img src="https://api.iconify.design/lucide:trash-2.svg?color=%23ff3333" width="16" alt="" /> **Thùng rác**: Chuyển sang khu vực quản lý bảng đã xóa tạm thời.<br>• <img src="https://api.iconify.design/lucide:rotate-cw.svg?color=%23ff3333" width="16" alt="" /> **Tải lại danh sách bảng**: Làm mới danh sách bảng theo thời gian thực.<br>• <img src="https://api.iconify.design/lucide:more-vertical.svg?color=%23ff3333" width="16" alt="" /> **(Tùy chọn khác)**: Menu mở rộng các tiện ích bổ sung. |
+| | **Dòng bảng dữ liệu** | Mỗi bảng hiển thị biểu tượng bảng tính và tên bảng. Nhấp vào dòng bảng để mở rộng các Dạng xem (Views) trực thuộc và nút <img src="https://api.iconify.design/lucide:plus.svg?color=%23ff3333" width="16" alt="" /> **Thêm view...**. |
+| | **Menu thao tác trên bảng (<img src="https://api.iconify.design/lucide:more-horizontal.svg?color=%23ff3333" width="16" alt="" />)** | Rê chuột vào dòng bảng sẽ xuất hiện nút <img src="https://api.iconify.design/lucide:rotate-cw.svg?color=%23ff3333" width="16" alt="" /> **Làm mới**, nút <img src="https://api.iconify.design/lucide:more-horizontal.svg?color=%23ff3333" width="16" alt="" /> **(Menu chức năng)** và mũi tên <img src="https://api.iconify.design/lucide:chevron-right.svg?color=%23ff3333" width="16" alt="" />. |
+
+---
+
+### Bảng chức năng menu ngữ cảnh của từng bảng dữ liệu
+
+Khi bấm vào biểu tượng <img src="https://api.iconify.design/lucide:more-horizontal.svg?color=%23ff3333" width="16" alt="" /> trên dòng bảng, một bảng chọn chức năng xuất hiện với tiêu đề là tên bảng (kèm nút sao chép slug định danh):
+
+| Lệnh thao tác | Biểu tượng | Tác vụ thực hiện |
+| :--- | :--- | :--- |
+| **Đổi tên bảng** | <img src="https://api.iconify.design/lucide:pencil.svg?color=%23ff3333" width="16" alt="" /> | Mở ngăn kéo bên phải để chỉnh sửa lại tên hiển thị của bảng. |
+| **Di chuyển sang category** | <img src="https://api.iconify.design/lucide:folder-input.svg?color=%23ff3333" width="16" alt="" /> | Chọn danh mục đích từ danh sách để chuyển nhóm quản lý cho bảng. |
+| **Trường** | <img src="https://api.iconify.design/lucide:list.svg?color=%23ff3333" width="16" alt="" /> | Điều hướng sang màn hình quản trị cấu trúc cột: `Trang chủ > Database > Table Fields`. |
+| **Quyền bảng** | <img src="https://api.iconify.design/lucide:shield.svg?color=%23ff3333" width="16" alt="" /> | Mở ngăn kéo bên phải cấu hình ma trận 9 quyền thao tác cấp độ bảng. |
+| **Quyền trường** | <img src="https://api.iconify.design/lucide:shield-alert.svg?color=%23ff3333" width="16" alt="" /> | Mở ngăn kéo bên phải thiết lập quyền xem và sửa chi tiết cho từng cột dữ liệu. |
+| **Bảo mật cấp bản ghi** | <img src="https://api.iconify.design/lucide:lock.svg?color=%23ff3333" width="16" alt="" /> | Mở ngăn kéo bên phải thiết lập điều kiện phân quyền Xem, Xuất, Sửa, Xóa theo từng vai trò hoặc người dùng. |
+| **Quan hệ** | <img src="https://api.iconify.design/lucide:network.svg?color=%23ff3333" width="16" alt="" /> | Điều hướng sang sơ đồ quan hệ tương tác trực quan: `Trang chủ > Database > Quan hệ`. |
+| **Webhooks** | <img src="https://api.iconify.design/lucide:webhook.svg?color=%23ff3333" width="16" alt="" /> | Mở hộp thoại `Tạo Webhook mới 🦉` để kết nối dữ liệu thời gian thực sang Workflow hoặc bên ngoài. |
+| **Đồ thị bảng (Graph)** | <img src="https://api.iconify.design/lucide:git-graph.svg?color=%23ff3333" width="16" alt="" /> | Mở khung nhìn đồ thị dữ liệu liên kết riêng của bảng này. |
 
 ---
 
 ## Các bước thực hiện
 
-### Chọn phương án khởi tạo bảng dữ liệu phù hợp
+### Giai đoạn 1 — Khởi tạo bảng dữ liệu mới
 
-| Phương án khởi tạo | Khi nào nên sử dụng | Kết quả nhận được |
+Khi bấm nút <img src="https://api.iconify.design/lucide:plus.svg?color=%23ff3333" width="16" alt="" /> **Tạo bảng** trên thanh công cụ, hộp thoại **Tạo bảng** xuất hiện với 3 tab chính:
+
+```
+[ + Tạo bảng ]          [ ✨ Tạo bằng AI ]          [ Import ]
+  ├── Tạo trực tiếp
+  └── Tạo từ bảng có sẵn
+```
+
+#### Phương án 1 — Tạo trực tiếp (Tạo bảng trống)
+
+| Bước | Thao tác thực hiện | Mô tả chi tiết |
 | :--- | :--- | :--- |
-| **Phương án 1 — Tạo bảng trống** | Khi bạn đã có sẵn thiết kế cấu trúc trường hoặc muốn tự tay thêm từng cột theo quy chuẩn riêng. | Một bảng mới được khởi tạo ngay với cột định danh mặc định, sẵn sàng để cấu hình trường. |
-| **Phương án 2 — Hỏi AI Dynamic Table Blueprint** | Khi bạn có ý tưởng nghiệp vụ nhưng chưa rõ cần những trường dữ liệu nào, quan hệ ra sao. | Trợ lý AI tự động gợi ý toàn bộ cấu trúc bảng, các cột phù hợp và hiển thị sơ đồ quan hệ ERD trực quan để bạn duyệt trước khi tạo. |
-| **Phương án 3 — Nhân bản bảng dữ liệu** | Khi bạn muốn tạo bảng mới có cấu trúc tương tự bảng hiện có, hoặc cần bản sao lưu dữ liệu để thử nghiệm. | Tạo ra một bảng mới kế thừa toàn bộ danh sách trường dữ liệu, có tùy chọn sao chép cả dữ liệu bản ghi và bộ lọc. |
-| **Phương án 4 — Import từ tệp dữ liệu ngoại bộ** | Khi bạn đã có sẵn dữ liệu từ file Excel (`.xlsx`), file văn bản (`.csv`) hoặc tệp cấu trúc (`.json`). | Tự động đọc tiêu đề cột, suy đoán kiểu dữ liệu thông minh và nhập hàng loạt bản ghi vào bảng mới. |
+| **1. Chọn tab Tạo trực tiếp** | Trong tab **+ Tạo bảng**, chọn nhánh phụ **Tạo trực tiếp**. | Mở biểu mẫu cấu hình cơ bản cho bảng mới. |
+| **2. Nhập thông số bảng** | Điền các trường thông tin:<br>• **Tên bảng \***: Nhập tên bảng muốn khởi tạo vào ô `Nhập tên bảng...`.<br>• **Danh mục**: Chọn danh mục quản lý từ danh sách thả xuống (hoặc để mặc định `Không chọn danh mục`).<br>• **Nguồn dữ liệu**: Chọn nguồn cơ sở dữ liệu lưu trữ (mặc định là `Mặc định`). | Cung cấp định danh và vị trí lưu trữ cho bảng. |
+| **3. Xác nhận tạo bảng** | Bấm nút xác nhận ở góc dưới hộp thoại. | Bảng mới xuất hiện trong danh sách và sẵn sàng để cấu hình trường dữ liệu. |
 
 ---
 
-### Giai đoạn 1 — Khởi tạo bảng dữ liệu mới
+#### Phương án 2 — Tạo từ bảng có sẵn (Kế thừa cấu trúc hoặc dữ liệu)
 
-#### Phương án 1 — Tạo bảng trống
+| Bước | Thao tác thực hiện | Mô tả chi tiết |
+| :--- | :--- | :--- |
+| **1. Chọn tab Tạo từ bảng có sẵn** | Trong tab **+ Tạo bảng**, chọn nhánh phụ **Tạo từ bảng có sẵn**. | Mở biểu mẫu sao chép và kế thừa bảng. |
+| **2. Cấu hình bảng nguồn** | • **Tên bảng \***: Nhập tên cho bảng mới.<br>• **Bảng nguồn \***: Nhấp vào menu thả xuống `Chọn bảng nguồn` và chọn bảng gốc muốn nhân bản. | Xác định nguồn kế thừa cấu trúc. |
+| **3. Tùy chọn sao chép dữ liệu** | Bật công tắc <img src="https://api.iconify.design/lucide:toggle-right.svg?color=%23ff3333" width="16" alt="" /> **Sao chép dữ liệu** nếu muốn giữ lại các bản ghi hiện có (nếu tắt, hệ thống chỉ nhân bản cấu trúc cột trống). | Kích hoạt bộ tùy biến dữ liệu sao chép. |
+| **4. Tùy chỉnh trường và bộ lọc (Tùy chọn)** | Khi công tắc Sao chép dữ liệu được bật:<br>• **Tùy chỉnh field sao chép**: Bật công tắc để chọn từng cột cần sao chép qua danh sách hộp kiểm (kèm nút `Bỏ chọn tất cả`).<br>• **Bộ lọc**: Bấm nút `+ Thêm điều kiện lọc` hoặc `+ Thêm nhóm` để thiết lập quy tắc lọc dữ liệu theo điều kiện logic **Và (AND)** / **Hoặc (OR)** (ví dụ: chỉ sao chép các bản ghi có trạng thái Hoàn thành). | Tối ưu phạm vi dữ liệu được kế thừa vào bảng mới. |
+| **5. Hoàn tất nhân bản** | Bấm nút xác nhận tạo bảng. | Hệ thống tiến hành tạo bảng mới với đúng cấu trúc và dữ liệu lọc đã chỉ định. |
 
-| Bước | Cách thực hiện |
-| :--- | :--- |
-| **1. Mở menu Tạo Bảng Mới** | Tại màn hình **Danh sách Bảng** (`/database`), bấm vào nút <img src="https://api.iconify.design/lucide:plus.svg?color=%23ff3333" width="16" alt="" /> **Tạo Bảng Mới** trên thanh công cụ và chọn **Tạo bảng trống**. |
-| **2. Nhập thông tin bảng** | Trong hộp thoại khởi tạo:<br>• **Tên bảng \***: Nhập tên bảng dữ liệu (ví dụ: `Khách Hàng Tiềm Năng`, `Đơn Đặt Hàng`).<br>• **Mô tả**: Nhập mục đích sử dụng và ý nghĩa nghiệp vụ của bảng.<br>• **Danh mục**: Chọn nhóm danh mục muốn phân loại (hoặc để mặc định `Chưa phân loại`). |
-| **3. Chọn loại View mặc định** | Chọn kiểu hiển thị đầu tiên cho bảng (mặc định là <img src="https://api.iconify.design/lucide:table.svg?color=%23ff3333" width="16" alt="" /> **Grid View**). Bạn có thể đặt lại **Tên View** ban đầu. |
-| **4. Xác nhận tạo** | Bấm nút <img src="https://api.iconify.design/lucide:check.svg?color=%23ff3333" width="16" alt="" /> **(Tạo bảng)**. Hệ thống sẽ mở ngay không gian làm việc của bảng mới tạo. |
+---
 
-#### Phương án 2 — Hỏi AI Dynamic Table Blueprint (Kèm xem trước sơ đồ ERD)
+#### Phương án 3 — Tạo bằng AI (AI Blueprint)
 
-| Bước | Cách thực hiện |
-| :--- | :--- |
-| **1. Mở công cụ Tạo bảng bằng AI** | Bấm vào nút <img src="https://api.iconify.design/lucide:plus.svg?color=%23ff3333" width="16" alt="" /> **Tạo Bảng Mới** và chọn dòng <img src="https://api.iconify.design/lucide:sparkles.svg?color=%23ff3333" width="16" alt="" /> **Hỏi AI Dynamic Table Blueprint**. |
-| **2. Nhập mô tả nghiệp vụ mong muốn** | Nhập yêu cầu nghiệp vụ vào khung thoại (ví dụ: `Hãy thiết kế bảng Quản lý Hợp đồng Bán lẻ gồm mã hợp đồng, khách hàng liên kết, ngày ký, tổng giá trị, trạng thái thanh toán và tệp đính kèm scan`). |
-| **3. Phân tích và xem trước sơ đồ ERD** | Bấm nút <img src="https://api.iconify.design/lucide:send.svg?color=%23ff3333" width="16" alt="" /> **(Phân tích)**. AI sẽ tạo ra bản thiết kế chi tiết bao gồm:<br>• Danh sách các cột đề xuất kèm kiểu dữ liệu tương ứng (Text, Currency, Date, Attachment, Select...).<br>• Khung xem trước sơ đồ quan hệ <img src="https://api.iconify.design/lucide:git-fork.svg?color=%23ff3333" width="16" alt="" /> **AiBlueprintErdPreview** trực quan mô phỏng liên kết với các bảng hiện có. |
-| **4. Điều chỉnh và áp dụng** | Bạn có thể chọn bỏ bớt hoặc thêm các cột theo ý muốn, sau đó bấm nút <img src="https://api.iconify.design/lucide:check.svg?color=%23ff3333" width="16" alt="" /> **(Khởi tạo theo Blueprint)** để hoàn tất. |
+| Bước | Thao tác thực hiện | Mô tả chi tiết |
+| :--- | :--- | :--- |
+| **1. Chọn tab Tạo bằng AI** | Nhấp vào tab **✨ Tạo bằng AI** trên thanh tiêu đề hộp thoại. | Mở khung nhập yêu cầu cho trợ lý thiết kế dữ liệu AI. |
+| **2. Nhập mô tả nghiệp vụ** | Nhập yêu cầu nghiệp vụ bằng văn bản tự nhiên (ví dụ: *"Tạo bảng Quản lý Hợp đồng gồm Mã hợp đồng, Khách hàng, Giá trị, Ngày ký, Hạn nghiệm thu và Trạng thái thanh toán"*). | Cung cấp ngữ cảnh nghiệp vụ để AI phân tích cấu trúc cột phù hợp. |
+| **3. Phân tích và duyệt Blueprint** | Bấm nút phân tích để AI đề xuất danh sách cột, kiểu dữ liệu tương ứng và xem trước sơ đồ quan hệ. | Người dùng duyệt lại danh sách cột đề xuất, thêm bớt trường tùy ý trước khi bấm xác nhận tạo. |
 
-#### Phương án 3 — Nhân bản bảng dữ liệu (Duplicate Table)
+---
 
-| Bước | Cách thực hiện |
-| :--- | :--- |
-| **1. Mở menu nhân bản** | Trên thẻ bảng muốn nhân bản (hoặc trong menu thả xuống Tạo Bảng Mới), chọn <img src="https://api.iconify.design/lucide:copy.svg?color=%23ff3333" width="16" alt="" /> **Nhân bản bảng**. |
-| **2. Cấu hình thông số nhân bản** | Trong hộp thoại nhân bản:<br>• **Tên bảng mới \***: Nhập tên cho bảng nhân bản (mặc định thêm tiền tố `Bản sao của...`).<br>• **Sao chép dữ liệu bản ghi**: Bật nút gạt nếu muốn giữ lại toàn bộ dữ liệu hiện có (nếu tắt, chỉ nhân bản bộ khung cấu trúc cột).<br>• **Sao chép bộ lọc & Dạng xem (Views)**: Bật nút gạt để kế thừa toàn bộ các View Grid, Kanban, Gallery, Calendar đã thiết lập. |
-| **3. Hoàn tất nhân bản** | Bấm nút <img src="https://api.iconify.design/lucide:copy.svg?color=%23ff3333" width="16" alt="" /> **(Bắt đầu nhân bản)**. |
+#### Phương án 4 — Import từ tệp ngoại bộ (CSV / Excel / JSON)
 
-#### Phương án 4 — Import từ tệp dữ liệu ngoại bộ (CSV / Excel / JSON)
-
-| Bước | Cách thực hiện |
-| :--- | :--- |
-| **1. Mở hộp thoại Import** | Bấm nút <img src="https://api.iconify.design/lucide:plus.svg?color=%23ff3333" width="16" alt="" /> **Tạo Bảng Mới** $\rightarrow$ chọn <img src="https://api.iconify.design/lucide:upload.svg?color=%23ff3333" width="16" alt="" /> **Import dữ liệu**. |
-| **2. Tải lên tệp nguồn** | Kéo thả tệp dữ liệu vào khung tải lên (hỗ trợ định dạng `.csv`, `.xlsx`, `.json` với dung lượng tối đa 20MB). |
-| **3. Xem trước và ánh xạ kiểu dữ liệu cột** | Hệ thống tự động trích xuất các cột từ dòng tiêu đề đầu tiên. Tại bảng ánh xạ:<br>• Kiểm tra **Tên cột**.<br>• Chọn lại **Kiểu dữ liệu** phù hợp nếu hệ thống nhận diện chưa đúng ý (ví dụ: chuyển đổi giữa Text, Number, Date, Phone, Email).<br>• Tích chọn cột làm **Khóa chính đại diện (Display Column)**. |
-| **4. Thực thi nhập dữ liệu** | Bấm nút <img src="https://api.iconify.design/lucide:arrow-right.svg?color=%23ff3333" width="16" alt="" /> **(Bắt đầu Import)**. Tiến trình sẽ hiển thị thanh phần trăm và tự động điều hướng sang bảng mới sau khi nhập dữ liệu thành công. |
+| Bước | Thao tác thực hiện | Mô tả chi tiết |
+| :--- | :--- | :--- |
+| **1. Chọn tab Import** | Nhấp vào tab **Import** (biểu tượng bảng tính màu xanh lá). | Tiêu đề hộp thoại chuyển thành **Tạo bảng từ Excel**. |
+| **2. Chọn Danh mục & Nguồn dữ liệu** | Chọn danh mục phân loại và nguồn dữ liệu đích từ các menu thả xuống. | Định vị bảng trước khi tải tệp lên. |
+| **3. Chọn loại tệp** | Chọn 1 trong 3 định dạng tại mục **1. Chọn loại tệp**:<br>• **CSV** (*Giá trị phân tách bằng dấu phẩy*).<br>• **Excel (XLSX)** (*Mở bằng Excel*).<br>• **JSON** (*JavaScript Object Notation*). | Xác định quy cách đọc cấu trúc tệp nguồn. |
+| **4. Tải tệp lên** | Tại mục **2. Tải tệp lên**, nhấp vào khung `Chọn file để tải lên` hoặc kéo thả tệp vào khung.<br>*(Hệ thống hỗ trợ file `.xlsx`, `.xls`, `.csv`, `.json` với dung lượng tối đa **10MB**)*. | Hệ thống phân tích tệp và hiển thị số sheet cùng số cột dữ liệu có trong tệp. |
+| **5. Ánh xạ trường dữ liệu (Nhập dữ liệu)** | Hệ thống chuyển sang màn hình **Nhập dữ liệu** với bảng ánh xạ 3 cột:<br>• **TRƯỜNG HỆ THỐNG TƯƠNG ỨNG**: Danh sách các trường dữ liệu của hệ thống.<br>• **NGUỒN DỮ LIỆU**: Menu thả xuống chọn cột tương ứng từ file đã tải lên (hoặc chọn `— Bỏ qua (Không import) —`).<br>• **CẤU HÌNH GIÁ TRỊ / ÁNH XẠ**: Thiết lập quy tắc chuyển đổi giá trị nếu cần. | Khớp nối chính xác dữ liệu từ file ngoại bộ vào hệ thống bảng RedAI. |
+| **6. Xác nhận nhập dữ liệu** | Bấm nút xác nhận để thực thi tiến trình import. | Hệ thống tự động tạo bảng mới và nhập hàng loạt bản ghi theo ánh xạ đã chọn. |
 
 ---
 
 ### Giai đoạn 2 — Quản lý phân loại danh mục (Categories)
 
-Để nhóm các bảng dữ liệu theo từng phòng ban, dự án hoặc quy trình:
-
-| Bước | Cách thực hiện |
-| :--- | :--- |
-| **1. Tạo danh mục mới** | Tại thanh bên trái của màn hình Danh sách Bảng, bấm nút <img src="https://api.iconify.design/lucide:plus.svg?color=%23ff3333" width="16" alt="" /> **Thêm danh mục mới** $\rightarrow$ Nhập tên nhóm (ví dụ: `Kinh Doanh`) $\rightarrow$ Bấm nút lưu. |
-| **2. Gán bảng vào danh mục** | Bấm vào menu <img src="https://api.iconify.design/lucide:more-horizontal.svg?color=%23ff3333" width="16" alt="" /> trên thẻ bảng $\rightarrow$ Chọn <img src="https://api.iconify.design/lucide:folder-input.svg?color=%23ff3333" width="16" alt="" /> **Di chuyển danh mục** $\rightarrow$ Chọn danh mục đích từ danh sách thả xuống $\rightarrow$ Bấm **Xác nhận**. |
-| **3. Sửa hoặc xóa danh mục** | Rê chuột vào tên danh mục trên thanh bên trái $\rightarrow$ Bấm biểu tượng <img src="https://api.iconify.design/lucide:more-vertical.svg?color=%23ff3333" width="16" alt="" />:<br>• **Đổi tên danh mục**: Sửa lại tên hiển thị.<br>• **Xóa danh mục**: Xóa nhóm phân loại (lưu ý: các bảng thuộc nhóm này sẽ tự động chuyển về trạng thái <img src="https://api.iconify.design/lucide:folder.svg?color=%23ff3333" width="16" alt="" /> **Chưa phân loại**, dữ liệu bên trong bảng không bị ảnh hưởng). |
-
----
-
-### Giai đoạn 3 — Vận hành Thùng rác và Khôi phục dữ liệu
-
-| Bước | Cách thực hiện |
-| :--- | :--- |
-| **1. Xóa tạm thời bảng dữ liệu** | Trên thẻ bảng cần xóa, bấm biểu tượng <img src="https://api.iconify.design/lucide:more-horizontal.svg?color=%23ff3333" width="16" alt="" /> $\rightarrow$ Chọn <img src="https://api.iconify.design/lucide:trash-2.svg?color=%23ff3333" width="16" alt="" /> **Xóa bảng**. Bảng sẽ biến mất khỏi danh sách hoạt động và được đưa vào Thùng rác. |
-| **2. Truy cập Thùng rác** | Tại thanh bên trái, nhấp vào mục <img src="https://api.iconify.design/lucide:trash-2.svg?color=%23ff3333" width="16" alt="" /> **Thùng rác**. Tại đây hiển thị danh sách các bảng bị xóa kèm thông tin:<br>• Tên bảng gốc.<br>• Thời gian xóa.<br>• **Hạn lưu trữ còn lại**: Đếm ngược số ngày còn lại (trong tổng hạn định 10 ngày). |
-| **3. Khôi phục hoặc xóa vĩnh viễn** | Tại mỗi dòng bảng trong Thùng rác:<br>• Bấm nút <img src="https://api.iconify.design/lucide:rotate-ccw.svg?color=%23ff3333" width="16" alt="" /> **(Khôi phục)**: Đưa bảng trở lại danh mục ban đầu với đầy đủ cấu hình cột và dữ liệu nguyên vẹn.<br>• Bấm nút <img src="https://api.iconify.design/lucide:x-circle.svg?color=%23ff3333" width="16" alt="" /> **(Xóa vĩnh viễn)**: Hủy bỏ hoàn toàn bảng dữ liệu khỏi hệ thống ngay lập tức (không thể phục hồi). |
+| Bước | Thao tác thực hiện | Mô tả chi tiết |
+| :--- | :--- | :--- |
+| **1. Tạo danh mục mới** | Tại thanh bên trái, bấm nút <img src="https://api.iconify.design/lucide:plus.svg?color=%23ff3333" width="16" alt="" /> cạnh chữ **Danh mục**. | Nhập tên danh mục mới (ví dụ: `Bán Hàng & CSKH`, `Kế Toán`) và bấm lưu. |
+| **2. Gán hoặc di chuyển bảng vào danh mục** | Rê chuột vào dòng bảng cần phân loại → Bấm <img src="https://api.iconify.design/lucide:more-horizontal.svg?color=%23ff3333" width="16" alt="" /> → Chọn <img src="https://api.iconify.design/lucide:folder-input.svg?color=%23ff3333" width="16" alt="" /> **Di chuyển sang category**. | Chọn danh mục đích từ danh sách để chuyển bảng vào nhóm quản lý tương ứng. |
+| **3. Đổi tên danh mục** | Rê chuột vào tên danh mục trên thanh bên trái → Bấm biểu tượng <img src="https://api.iconify.design/lucide:pencil.svg?color=%23ff3333" width="16" alt="" /> **(Chỉnh sửa)**. | Nhập tên mới cho danh mục và lưu lại. |
+| **4. Xóa danh mục** | Rê chuột vào tên danh mục → Bấm biểu tượng <img src="https://api.iconify.design/lucide:trash-2.svg?color=%23ff3333" width="16" alt="" /> **(Xóa)**. | Xác nhận xóa danh mục. Các bảng bên trong danh mục này sẽ tự động chuyển về mục <img src="https://api.iconify.design/lucide:folder.svg?color=%23ff3333" width="16" alt="" /> **Chưa có Category**, toàn bộ dữ liệu bảng vẫn được bảo toàn nguyên vẹn. |
 
 ---
 
-### Giai đoạn 4 — Xuất bản bảng thành Tool & MCP cho AI Agent
+### Giai đoạn 3 — Vận hành Thùng rác và Khôi phục bảng dữ liệu
 
-Tính năng độc quyền của RedAI cho phép biến bất kỳ bảng dữ liệu động nào thành một bộ công cụ lập trình để AI Agent tự động đọc/ghi:
+Hệ thống RedAI Database tích hợp cơ chế bảo vệ xóa mềm tự động để chống thất thoát dữ liệu do thao tác nhầm lẫn:
 
-| Bước | Cách thực hiện |
-| :--- | :--- |
-| **1. Mở menu chuyển hóa** | Trên thẻ bảng dữ liệu, bấm vào biểu tượng <img src="https://api.iconify.design/lucide:more-horizontal.svg?color=%23ff3333" width="16" alt="" /> $\rightarrow$ Chọn <img src="https://api.iconify.design/lucide:folder-sync.svg?color=%23ff3333" width="16" alt="" /> **Chuyển hóa thành Tool & MCP**. |
-| **2. Cấu hình đặc tả xuất bản** | Trong hộp thoại xuất bản:<br>• **Tên nhóm Project Schema**: Đặt tên đại diện cho nhóm công cụ (mặc định lấy theo tên bảng).<br>• **Các quyền thao tác cấp phép**: Tích chọn các API muốn sinh ra gồm: `Xem danh sách bản ghi (List/Query)`, `Xem chi tiết bản ghi (Get)`, `Thêm bản ghi mới (Create)`, `Cập nhật bản ghi (Update)`, `Xóa bản ghi (Delete)`.<br>• **Đăng ký MCP Server**: Bật tùy chọn nếu muốn tự động đăng ký endpoint này vào hệ thống máy chủ MCP của Không gian làm việc. |
-| **3. Hoàn tất xuất bản** | Bấm nút <img src="https://api.iconify.design/lucide:check.svg?color=%23ff3333" width="16" alt="" /> **(Xác nhận xuất bản)**. Sau khi hoàn tất, AI Agent có thể gọi trực tiếp các công cụ này trong hội thoại mà không cần lập trình thủ công. |
+| Bước | Thao tác thực hiện | Mô tả chi tiết |
+| :--- | :--- | :--- |
+| **1. Xóa tạm thời bảng dữ liệu** | Rê chuột vào dòng bảng cần xóa → Bấm biểu tượng <img src="https://api.iconify.design/lucide:more-horizontal.svg?color=%23ff3333" width="16" alt="" /> → Chọn lệnh xóa bảng. | Bảng được gỡ khỏi danh sách hoạt động và chuyển vào lưu trữ tạm thời trong Thùng rác. |
+| **2. Truy cập khu vực Thùng rác** | Trên thanh công cụ phía trên bên phải màn hình danh sách bảng, bấm vào biểu tượng <img src="https://api.iconify.design/lucide:trash-2.svg?color=%23ff3333" width="16" alt="" /> **Thùng rác**. | Màn hình hiển thị danh sách các bảng bị xóa tạm thời kèm khung thông báo vàng:<br>*"Cơ chế lưu trữ thùng rác: Các bảng trong thùng rác có thể được khôi phục bất cứ lúc nào. Sau 10 ngày kể từ khi xóa mềm, hệ thống sẽ tự động xóa vĩnh viễn dữ liệu."* |
+| **3. Kiểm tra thông tin lưu trữ** | Quan sát danh sách bảng trong thùng rác. | Mỗi dòng hiển thị: Tên bảng, slug định danh và đồng hồ đếm ngược: `(clock) Còn {N} ngày nữa sẽ xóa vĩnh viễn`. |
+| **4. Khôi phục bảng dữ liệu** | Trên dòng bảng cần lấy lại, bấm biểu tượng <img src="https://api.iconify.design/lucide:rotate-ccw.svg?color=%23ff3333" width="16" alt="" /> **Khôi phục**. | Bảng được đưa trở lại danh mục ban đầu với đầy đủ cấu trúc cột, các Dạng xem (Views) và dữ liệu nguyên vẹn. |
+| **5. Xóa vĩnh viễn dữ liệu** | Trên dòng bảng muốn hủy bỏ hoàn toàn, bấm biểu tượng <img src="https://api.iconify.design/lucide:trash-2.svg?color=%23ff3333" width="16" alt="" /> **Xóa vĩnh viễn**. | Hệ thống yêu cầu xác nhận lần cuối trước khi xóa hoàn toàn bảng khỏi cơ sở dữ liệu (thao tác này không thể phục hồi). |
+| **6. Thao tác hàng loạt & Quay lại** | • Dùng hộp kiểm `[ ] Chọn tất cả` để khôi phục hoặc xóa vĩnh viễn nhiều bảng cùng lúc.<br>• Bấm biểu tượng mũi tên <img src="https://api.iconify.design/lucide:arrow-left.svg?color=%23ff3333" width="16" alt="" /> trên thanh công cụ Thùng rác để quay lại danh sách bảng hoạt động. | Quản lý vòng đời dữ liệu theo lô nhanh chóng và tiện lợi. |
 
 ---
 
 ## Kiểm tra kết quả
 
-Sau khi hoàn tất quy trình khởi tạo và tổ chức danh mục, bạn kiểm tra lại theo các tiêu chí:
+Sau khi hoàn thành quy trình khởi tạo bảng và sắp xếp danh mục, người dùng kiểm tra lại theo các tiêu chí:
 
-1. **Hiển thị trên Danh sách Bảng**: Tên bảng mới xuất hiện đúng vị trí trong danh mục đã gán, hiển thị đúng số lượng cột ban đầu và trạng thái hoạt động.
-2. **Cấu trúc trường và View**: Mở bảng dữ liệu, thanh tiêu đề hiển thị đúng tên bảng và Tab View mặc định đầu tiên hoạt động ổn định.
-3. **Thùng rác**: Khi thực hiện xóa thử một bảng, bảng lập tức chuyển vào mục Thùng rác kèm thời gian đếm ngược chính xác, và khi bấm Khôi phục bảng trở lại nguyên vẹn vị trí cũ.
-4. **Tool & MCP**: Nếu có xuất bản công cụ, kiểm tra trong mô-đun Tích hợp hoặc màn hình Quản lý Custom Tools thấy xuất hiện nhóm API tương ứng với bảng.
+| Hạng mục kiểm tra | Tiêu chí đạt chuẩn |
+| :--- | :--- |
+| **1. Vị trí hiển thị bảng** | Bảng mới xuất hiện đúng trong danh mục đã chỉ định hoặc trong mục `Chưa có Category`. |
+| **2. Cấu trúc trường & Dữ liệu** | Nhấp vào dòng bảng để mở Dạng xem mặc định; kiểm tra tên các cột và số lượng bản ghi hiển thị chính xác theo phương án khởi tạo (bảng trống, bảng nhân bản hoặc import từ file). |
+| **3. Tính năng khôi phục** | Thử nghiệm đưa bảng vào Thùng rác và khôi phục lại; bảng hiển thị đúng thời hạn 10 ngày đếm ngược và phục hồi nguyên vẹn khi nhấn nút khôi phục. |
 
 ---
 
 ## Hướng dẫn thao tác qua trợ lý ảo AI Agent
 
+Bạn có thể yêu cầu trợ lý ảo AI Agent tự động khởi tạo bảng dữ liệu mới, nhân bản bảng từ mẫu có sẵn, tổ chức phân loại theo danh mục và xuất bản API công cụ thông qua bộ công cụ quản trị Database.
+
 ### Chuẩn bị kỹ năng (Skill) cho trợ lý ảo AI Agent
 
-Để trợ lý ảo AI Agent có thể tự động thực hiện các thao tác khởi tạo bảng, cấu hình danh mục và quản lý dữ liệu, bạn cần đảm bảo Agent đã được trang bị Kỹ năng (Skill) sau:
+- **Kỹ năng (Skill) cần trang bị**: `RedAI - Module - Database` (ID: `65f9c362-0a8b-4ce6-9ba0-d29375b4cea6`)
+- **Bộ công cụ (Tool Suite) đi kèm**: `RedAI - Module - Database` (ID: `eb8a7504-5844-4e6e-ba7f-7645f104c0af`)
+- **Quyền hạn tài khoản**: Tài khoản người dùng có quyền quản trị cơ sở dữ liệu trong Workspace (Member, Editor, Admin hoặc Owner).
 
-| Thông số cấu hình | Giá trị chính xác |
-| :--- | :--- |
-| **Tên Kỹ năng (Skill Name)** | `RedAI - Module - Database` |
-| **Mã định danh Kỹ năng (Skill ID)** | `65f9c362-0a8b-4ce6-9ba0-d29375b4cea6` |
-| **Bộ công cụ (Tool Suite)** | `RedAI - Module - Database` |
-| **Mã định danh Bộ công cụ (Tool Suite ID)** | `eb8a7504-5844-4e6e-ba7f-7645f104c0af` |
-| **Quyền tài khoản yêu cầu** | Workspace Member, Editor, Admin hoặc Owner |
+### Bảng liên kết thao tác giao diện và công cụ của trợ lý ảo AI Agent
 
----
-
-### Bảng ánh xạ giao diện người dùng sang công cụ AI Agent
-
-| Tác vụ trên Giao diện | Tên Tool tương ứng | Ý nghĩa & Tham số chính |
+| Thao tác trên giao diện | Công cụ trợ lý ảo AI Agent sử dụng | Nhiệm vụ của công cụ |
 | :--- | :--- | :--- |
-| Bấm **Tạo Bảng Mới** $\rightarrow$ Tạo bảng trống | `table_createTable` | Khởi tạo bảng dữ liệu mới trong workspace (`name`, `description`, `categoryId`, `viewType`). |
-| Xem danh sách bảng trên màn hình `/database` | `table_listTables` | Lấy danh sách toàn bộ các bảng trong workspace (`workspaceId`, `categoryId`, `includeSystem`). |
-| Nhấp đúp đổi tên bảng hoặc cập nhật mô tả | `table_updateTable` | Chỉnh sửa thuộc tính bảng (`tableId`, `name`, `description`, `categoryId`). |
-| Chuyển bảng vào **Thùng rác** | `table_deleteTable` | Xóa mềm bảng dữ liệu, đưa vào vùng lưu trữ 10 ngày (`tableId`). |
-| Bấm **Khôi phục** bảng trong Thùng rác | `table_restoreTable` | Phục hồi bảng dữ liệu từ thùng rác về danh mục hoạt động (`tableId`). |
-| Bấm **Thêm danh mục mới** trên thanh bên | `category_createCategory` | Tạo nhóm danh mục phân loại mới (`name`, `description`, `order`). |
-| Đổi tên hoặc sắp xếp nhóm danh mục | `category_updateCategory` | Cập nhật tên và thứ tự hiển thị danh mục (`categoryId`, `name`, `order`). |
-| Bấm **Xóa danh mục** | `category_deleteCategory` | Xóa nhóm danh mục (`categoryId`, `reassignToUncategorized: true`). |
-| Bấm **Import dữ liệu** từ file CSV/Excel | `import_importData` | Nhập dữ liệu tự động theo lô vào bảng (`tableId`, `fileUrl`, `mappings`). |
-| Bấm **Chuyển hóa thành Tool & MCP** | `table_publishAsTool` | Đăng ký tự động API CRUD của bảng thành Custom Tools và MCP Server (`tableId`, `operations`). |
+| Bấm <img src="https://api.iconify.design/lucide:plus.svg?color=%23ff3333" width="16" alt="" /> **Tạo bảng** $\rightarrow$ **Tạo trực tiếp** | `createTable` | Khởi tạo bảng dữ liệu mới với tên và mô tả chỉ định (tự động có sẵn các cột hệ thống chuẩn). |
+| Bấm **Tạo từ bảng có sẵn** (Nhân bản cấu trúc & dữ liệu) | `duplicateTable` | Nhân bản một bảng hiện có sang bảng mới, kế thừa cấu trúc cột và tùy chọn sao chép dữ liệu. |
+| Bấm **Tạo nhiều bảng cùng lúc** | `bulkCreateTables` | Khởi tạo đồng thời danh sách nhiều bảng nghiệp vụ trong cùng một thao tác. |
+| Rê chuột vào bảng $\rightarrow$ <img src="https://api.iconify.design/lucide:more-horizontal.svg?color=%23ff3333" width="16" alt="" /> $\rightarrow$ <img src="https://api.iconify.design/lucide:pencil.svg?color=%23ff3333" width="16" alt="" /> **Đổi tên bảng** | `updateTable` | Cập nhật lại tên hiển thị hoặc phần mô tả nghiệp vụ của bảng dữ liệu. |
+| Xem danh sách bảng và chi tiết schema | `listTables`, `getTable` | Liệt kê toàn bộ danh sách bảng đang hoạt động trong Base và xem chi tiết cấu hình của một bảng. |
+| Kéo thả sắp xếp thứ tự bảng | `reorderTables` | Sắp xếp lại thứ tự xuất hiện của các bảng dữ liệu trên thanh danh sách. |
+| Bấm <img src="https://api.iconify.design/lucide:plus.svg?color=%23ff3333" width="16" alt="" /> cạnh chữ **Danh mục** để thêm danh mục mới | `createCollectionCategory` | Tạo nhóm danh mục phân loại mới trên thanh bên trái. |
+| Rê chuột vào danh mục $\rightarrow$ <img src="https://api.iconify.design/lucide:pencil.svg?color=%23ff3333" width="16" alt="" /> (Chỉnh sửa) hoặc <img src="https://api.iconify.design/lucide:trash-2.svg?color=%23ff3333" width="16" alt="" /> (Xóa) | `updateCollectionCategory`, `deleteCollectionCategory` | Đổi tên danh mục hoặc xóa nhóm danh mục (bảng bên trong tự động về Chưa có Category). |
+| Rê chuột vào bảng $\rightarrow$ <img src="https://api.iconify.design/lucide:more-horizontal.svg?color=%23ff3333" width="16" alt="" /> $\rightarrow$ <img src="https://api.iconify.design/lucide:folder-input.svg?color=%23ff3333" width="16" alt="" /> **Di chuyển sang category** | `assignTableCollectionCategory` | Gán hoặc di chuyển bảng dữ liệu vào nhóm danh mục phân loại tương ứng. |
+| Rê chuột vào bảng $\rightarrow$ <img src="https://api.iconify.design/lucide:more-horizontal.svg?color=%23ff3333" width="16" alt="" /> $\rightarrow$ Chọn lệnh xóa bảng / xóa hàng loạt | `bulkDeleteTables` | Xóa mềm các bảng dữ liệu do người dùng tạo và chuyển vào Thùng rác lưu trữ 10 ngày. |
+| Rê chuột vào bảng $\rightarrow$ <img src="https://api.iconify.design/lucide:more-horizontal.svg?color=%23ff3333" width="16" alt="" /> $\rightarrow$ <img src="https://api.iconify.design/lucide:folder-sync.svg?color=%23ff3333" width="16" alt="" /> **Chuyển hóa thành Tool & MCP** | `convertDynamicBaseTables` | Đăng ký và đồng bộ các bảng dữ liệu thành bộ công cụ Project Schema API cho AI Agent gọi tự động. |
 
----
-
-### Khung lệnh (Prompt) mẫu chuẩn 4 phần cho AI Agent
-
-Dưới đây là mẫu câu lệnh hoàn chỉnh để ra lệnh cho AI Agent tự động khởi tạo danh mục và bảng dữ liệu nghiệp vụ:
+### Câu lệnh mẫu (Prompt mẫu)
 
 ```text
-[MỤC TIÊU]
-Khởi tạo một danh mục bảng mới có tên "Quản Trị Bán Hàng" và tạo bên trong một bảng dữ liệu động mới mang tên "Khách Hàng Doanh Nghiệp" trên RedAI Database.
+Hãy giúp tôi khởi tạo danh mục và bảng dữ liệu nghiệp vụ trên RedAI Database theo quy trình chuẩn:
 
-[DỮ LIỆU ĐẦU VÀO]
+1. Bối cảnh và Mục tiêu:
+- Tôi cần thiết lập phân hệ quản trị kinh doanh gồm một nhóm danh mục phân loại và một bảng dữ liệu quản lý thông tin khách hàng B2B.
+
+2. Dữ liệu cung cấp:
 - Tên danh mục mới: "Quản Trị Bán Hàng"
 - Tên bảng dữ liệu: "Khách Hàng Doanh Nghiệp"
-- Mô tả bảng: "Bảng lưu trữ thông tin đối tác B2B, người liên hệ đại diện, mã số thuế và doanh thu ước tính."
-- Cấu hình View mặc định: Dạng Grid View với tên "Tất cả khách hàng B2B".
+- Mô tả bảng: "Bảng lưu trữ hồ sơ đối tác doanh nghiệp B2B, người liên hệ đại diện, mã số thuế và quy mô hợp đồng."
 
-[QUY TRÌNH THỰC THI]
-1. Gọi tool `category_createCategory` để tạo danh mục "Quản Trị Bán Hàng" và lưu lại `categoryId` vừa tạo.
-2. Gọi tool `table_createTable` với tham số `name: "Khách Hàng Doanh Nghiệp"`, `categoryId` tương ứng và đặt view mặc định là GRID.
-3. Kiểm tra thông tin phản hồi để xác nhận `tableId` và `viewId` đã được cấp phát thành công.
+3. Các bước yêu cầu thực hiện:
+- Bước 1: Gọi tool listCollectionCategories để kiểm tra xem danh mục "Quản Trị Bán Hàng" đã tồn tại chưa; nếu chưa, gọi createCollectionCategory để tạo mới.
+- Bước 2: Gọi tool createTable để khởi tạo bảng dữ liệu mới mang tên "Khách Hàng Doanh Nghiệp" với mô tả trên.
+- Bước 3: Gọi tool assignTableCollectionCategory để đưa bảng "Khách Hàng Doanh Nghiệp" vừa tạo vào đúng danh mục "Quản Trị Bán Hàng".
+- Bước 4: Gọi tool getTable để đọc lại cấu hình và xác nhận bảng đã được kích hoạt thành công.
 
-[TIÊU CHÍ HOÀN THÀNH]
-- Danh mục "Quản Trị Bán Hàng" xuất hiện trên thanh bên trái danh sách bảng.
-- Bảng "Khách Hàng Doanh Nghiệp" được khởi tạo thành công bên trong danh mục đó.
-- Trả về mã định danh `tableId` và đường dẫn truy cập trực tiếp trên giao diện để người dùng vào sử dụng ngay.
+4. Yêu cầu phản hồi:
+- Báo cáo lại tên bảng, mã định danh bảng, danh mục trực thuộc và danh sách các cột hệ thống mặc định đã được tạo sẵn.
 ```
 
----
+### Kiểm tra kết quả sau khi ra lệnh cho trợ lý ảo AI Agent
 
-### Bảng kiểm tra chéo 2 chiều (UI $\leftrightarrow$ AI Agent)
+| Cách kiểm tra | Thao tác thực hiện |
+| :--- | :--- |
+| **Cách 1 — Kiểm tra trực tiếp trên giao diện** | Truy cập `Trang chủ > Database`, quan sát thanh bên trái thấy xuất hiện thư mục danh mục **Quản Trị Bán Hàng**, bên trong có bảng **Khách Hàng Doanh Nghiệp**; bấm vào dòng bảng để mở dạng xem dữ liệu ban đầu. |
+| **Cách 2 — Yêu cầu trợ lý ảo AI Agent kiểm tra lại** | Gửi câu lệnh: *"Hãy gọi `listTables` và `getTable` cho bảng 'Khách Hàng Doanh Nghiệp' để xác nhận bảng và danh mục đã khớp 100%."* |
+
+### Bảng kiểm tra chéo 2 chiều (UI ↔ AI Agent)
 
 | Hành động thực hiện trên Giao diện UI | Kết quả kiểm tra xác thực bằng Tool Agent |
 | :--- | :--- |
-| Tạo bảng mới hoặc đổi tên bảng trên giao diện | Gọi `table_listTables` thấy xuất hiện bảng mới với đúng tên và mô tả đã đặt. |
-| Thêm danh mục mới và chuyển bảng vào danh mục | Gọi `category_listCategories` và `table_getTableDetail` thấy `categoryId` trùng khớp. |
-| Bấm xóa bảng đưa vào thùng rác | Gọi `table_listTables` không còn thấy bảng ở trạng thái hoạt động; gọi `trash_listDeletedTables` thấy bảng kèm hạn 10 ngày. |
+| Bấm **Tạo bảng** hoặc đổi tên bảng trên giao diện | Gọi `listTables` thấy xuất hiện bảng mới với đúng tên và mô tả vừa cập nhật. |
+| Bấm **Thêm danh mục mới** và chuyển bảng vào danh mục | Gọi `listCollectionCategories` và `getTable` thấy bảng đã thuộc nhóm danh mục chỉ định. |
+| Chọn xóa bảng đưa vào Thùng rác | Gọi `listTables` không còn thấy bảng trong danh sách hoạt động chính. |
 | **Lệnh thực hiện bởi AI Agent qua Tool** | **Vị trí và dấu hiệu kiểm tra trên Giao diện UI** |
-| Agent gọi `table_createTable` tạo bảng mới | Tải lại trang `/database`, thẻ bảng mới lập tức xuất hiện trong danh mục tương ứng. |
-| Agent gọi `category_createCategory` tạo danh mục | Thanh bên trái xuất hiện thêm tên nhóm danh mục mới trong danh sách. |
-| Agent gọi `table_restoreTable` phục hồi bảng | Truy cập `/database`, bảng được phục hồi hoàn chỉnh dữ liệu và không còn nằm trong mục Thùng rác. |
+| Agent gọi `createTable` tạo bảng mới | Tải lại trang `Trang chủ > Database`, dòng bảng mới lập tức xuất hiện trong danh sách. |
+| Agent gọi `createCollectionCategory` tạo danh mục | Thanh bên trái xuất hiện thêm tên nhóm danh mục mới cùng biểu tượng thư mục. |
+| Agent gọi `assignTableCollectionCategory` gán danh mục | Bảng dữ liệu tự động hiển thị bên trong nhóm danh mục mới thay vì mục Chưa có Category. |

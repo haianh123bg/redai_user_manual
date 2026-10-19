@@ -1,224 +1,200 @@
-## Mở thanh điều khiển View Header và Chuyển đổi Dạng xem
+## Mở khu vực Quản trị Dạng xem (Views)
 
-Trong **RedAI Database**, Dạng xem (Views) cho phép bạn quan sát, phân tích và tương tác với cùng một nguồn dữ liệu theo nhiều góc nhìn trực quan khác nhau: từ bảng tính truyền thống, bảng thẻ quy trình, thư viện ảnh, lịch biểu thời gian cho đến biểu mẫu thu thập dữ liệu công khai. Mỗi bảng dữ liệu có thể chứa không giới hạn các dạng xem được lưu trữ cấu hình độc lập.
+Dạng xem (Views) trong **RedAI Database** cho phép người dùng quan sát, lọc và tương tác với cùng một cơ sở dữ liệu dưới nhiều góc độ khác nhau (bảng tính, bảng thẻ Kanban, thư viện ảnh, lịch biểu và biểu mẫu công khai). Mỗi bảng dữ liệu hỗ trợ không giới hạn số lượng dạng xem với các cấu hình bộ lọc và quyền hạn độc lập.
 
-Để mở thanh điều khiển View và chuyển đổi các góc nhìn, bạn truy cập vào đường dẫn của bảng tương ứng:
+| Phương thức truy cập | Thao tác trên giao diện | Chi tiết hiển thị |
+| :--- | :--- | :--- |
+| **1. Mở rộng danh sách View từ Bảng** | Tại danh sách bảng (`Trang chủ > Database`), nhấp chuột vào dòng bảng cần xem. | Dòng bảng mở rộng ra danh sách các Dạng xem trực thuộc kèm nút <img src="https://api.iconify.design/lucide:plus.svg?color=%23ff3333" width="16" alt="" /> **Thêm view...**. |
+| **2. Chuyển đổi giữa các Dạng xem** | Nhấp vào tên một Dạng xem trong danh sách con của bảng. | Hệ thống điều hướng vào màn hình làm việc tương ứng:<br>• **Grid View**: `Trang chủ > Database > View Details`<br>• **Kanban View**: `Trang chủ > Database > Kanban View`<br>• **Form View**: `Trang chủ > Database > Form View`<br>• **Calendar View**: `Trang chủ > Database > Calendar View` |
 
-1. **Thanh tiêu đề dạng xem (View Header & Tabs)**: Nằm ngay dưới thanh tiêu đề chính của bảng dữ liệu, hiển thị danh sách các tab View hiện có cùng các nút điều khiển:
-   - Các tab Dạng xem hiện có: Nhấp vào từng tab để chuyển đổi không gian làm việc tương ứng:
-     - <img src="https://api.iconify.design/lucide:table.svg?color=%23ff3333" width="16" alt="" /> **Grid View** (`/database/table/:tableId/view/:viewId`): Bảng tính dữ liệu chi tiết dạng hàng và cột.
-     - <img src="https://api.iconify.design/lucide:kanban.svg?color=%23ff3333" width="16" alt="" /> **Kanban View** (`/database/table/:tableId/kanban/:viewId`): Bảng quản lý thẻ công việc theo các cột trạng thái quy trình.
-     - <img src="https://api.iconify.design/lucide:layout-grid.svg?color=%23ff3333" width="16" alt="" /> **Gallery View** (`/database/table/:tableId/gallery/:viewId`): Thư viện thẻ trực quan nổi bật hình ảnh và thông tin tóm tắt.
-     - <img src="https://api.iconify.design/lucide:calendar.svg?color=%23ff3333" width="16" alt="" /> **Calendar View** (`/database/table/:tableId/calendar/:viewId`): Lịch biểu trực quan theo tháng, tuần, ngày dựa trên các mốc thời gian.
-     - <img src="https://api.iconify.design/lucide:file-text.svg?color=%23ff3333" width="16" alt="" /> **Form View** (`/database/table/:tableId/form/:viewId`): Biểu mẫu nhập liệu trực quan có thể chia sẻ công khai qua liên kết hoặc mã QR.
-   - Nút <img src="https://api.iconify.design/lucide:plus.svg?color=%23ff3333" width="16" alt="" /> **(Thêm View mới)**: Mở hộp thoại **Tạo Dạng xem mới (CreateViewModal)** để bổ sung thêm một góc nhìn mới cho bảng.
-   - Menu ngữ cảnh trên từng tab View (<img src="https://api.iconify.design/lucide:chevron-down.svg?color=%23ff3333" width="16" alt="" />): Cho phép đổi tên View, nhân bản View, khóa cấu hình View (chống chỉnh sửa bộ lọc/cột ngoài ý muốn) hoặc xóa View khỏi bảng.
-2. **Thanh công cụ tác vụ đa năng (View Toolbar)**: Bố trí ngay dưới tab View, cung cấp bộ công cụ mạnh mẽ:
-   - <img src="https://api.iconify.design/lucide:search.svg?color=%23ff3333" width="16" alt="" /> **Tìm kiếm bản ghi**: Nhập từ khóa để tìm kiếm nhanh trên tất cả các trường hoặc lọc theo một trường chỉ định.
-   - <img src="https://api.iconify.design/lucide:filter.svg?color=%23ff3333" width="16" alt="" /> **Lọc (Filter)**: Tạo bộ lọc đa điều kiện kết hợp toán tử AND/OR hoặc nhờ AI sinh bộ lọc tự động.
-   - <img src="https://api.iconify.design/lucide:arrow-up-down.svg?color=%23ff3333" width="16" alt="" /> **Sắp xếp (Sort)**: Sắp xếp dữ liệu đa tầng theo thứ tự tăng dần hoặc giảm dần.
-   - <img src="https://api.iconify.design/lucide:layers.svg?color=%23ff3333" width="16" alt="" /> **Gom nhóm (Group by)**: Gom nhóm các dòng theo giá trị của cột chỉ định.
-   - <img src="https://api.iconify.design/lucide:eye-off.svg?color=%23ff3333" width="16" alt="" /> **Ẩn/Hiện trường (Fields)**: Tùy chỉnh danh sách các cột hiển thị riêng cho View này.
-   - <img src="https://api.iconify.design/lucide:palette.svg?color=%23ff3333" width="16" alt="" /> **Tô màu dòng (Row Color Rules)**: Đặt màu nền nổi bật cho các bản ghi thỏa mãn điều kiện.
-   - <img src="https://api.iconify.design/lucide:rows.svg?color=%23ff3333" width="16" alt="" /> **Chiều cao dòng (Row Height)**: Chọn kích thước dòng hiển thị (Nhỏ, Trung bình, Lớn, Rất lớn).
-   - <img src="https://api.iconify.design/lucide:share-2.svg?color=%23ff3333" width="16" alt="" /> **Chia sẻ View**: Quản lý liên kết công khai, tạo link rút gọn và mã QR.
+---
+
+### Bảng chức năng menu tác vụ trên từng Dạng xem (<img src="https://api.iconify.design/lucide:more-horizontal.svg?color=%23ff3333" width="16" alt="" />)
+
+Khi rê chuột vào một dòng View và bấm menu ba chấm <img src="https://api.iconify.design/lucide:more-horizontal.svg?color=%23ff3333" width="16" alt="" /> (hoặc mở menu tiện ích trên thanh công cụ của View Details), một bảng chọn chức năng xuất hiện:
+
+| Lệnh thao tác | Biểu tượng | Phạm vi & Chức năng chi tiết |
+| :--- | :--- | :--- |
+| **Đổi tên view** | <img src="https://api.iconify.design/lucide:pencil.svg?color=%23ff3333" width="16" alt="" /> | Đổi tên hiển thị nhận diện cho Dạng xem. |
+| **Nhân bản View** | <img src="https://api.iconify.design/lucide:copy.svg?color=%23ff3333" width="16" alt="" /> | Tạo bản sao mới kế thừa toàn bộ cấu hình hiển thị, bộ lọc và quy tắc sắp xếp. |
+| **Nhập dữ liệu** | <img src="https://api.iconify.design/lucide:upload.svg?color=%23ff3333" width="16" alt="" /> | Tải tệp Excel/CSV lên để nhập thêm các bản ghi mới vào view này. |
+| **Xuất dữ liệu** | <img src="https://api.iconify.design/lucide:download.svg?color=%23ff3333" width="16" alt="" /> | Xuất toàn bộ bản ghi đang hiển thị theo bộ lọc hiện tại ra tệp bảng tính. |
+| **Trung Tâm Tiện Ích** | <img src="https://api.iconify.design/lucide:sparkles.svg?color=%23ff3333" width="16" alt="" /> | Mở ngăn kéo bộ công cụ nâng cao: in tem nhãn QR, làm sạch dữ liệu, sinh dữ liệu mẫu... |
+| **Gộp dữ liệu** | <img src="https://api.iconify.design/lucide:git-merge.svg?color=%23ff3333" width="16" alt="" /> | Hợp nhất dữ liệu từ bảng hoặc nguồn dữ liệu khác vào view hiện tại. |
+| **Cập nhật theo điều kiện** | <img src="https://api.iconify.design/lucide:edit-3.svg?color=%23ff3333" width="16" alt="" /> | Cập nhật hàng loạt giá trị cho các bản ghi thỏa mãn điều kiện chỉ định. |
+| **Quyền bảng** | <img src="https://api.iconify.design/lucide:shield.svg?color=%23ff3333" width="16" alt="" /> | Mở ngăn kéo quản trị 9 phạm vi phân quyền bảng. |
+| **Quyền trường** | <img src="https://api.iconify.design/lucide:shield-alert.svg?color=%23ff3333" width="16" alt="" /> | Mở ngăn kéo phân quyền xem và sửa chi tiết cho từng cột dữ liệu. |
+| **Bảo mật cấp bản ghi** | <img src="https://api.iconify.design/lucide:lock.svg?color=%23ff3333" width="16" alt="" /> | Phân quyền Xem, Xuất, Sửa, Xóa bản ghi theo vai trò hoặc bộ lọc điều kiện. |
+| **Shared view** | <img src="https://api.iconify.design/lucide:share-2.svg?color=%23ff3333" width="16" alt="" /> | Mở ngăn kéo cấu hình liên kết chia sẻ công khai kèm mật mã bảo vệ. |
+| **Xóa view** | <img src="https://api.iconify.design/lucide:trash-2.svg?color=%23ff3333" width="16" alt="" /> | Xóa dạng xem này khỏi bảng (lưu ý: mỗi bảng phải giữ lại tối thiểu 1 view cuối cùng). |
 
 ---
 
 ## Các bước thực hiện
 
-### Chọn dạng xem phù hợp với bài toán nghiệp vụ
+### Giai đoạn 1 — Khởi tạo Dạng xem mới (Cấu hình View)
 
-| Dạng xem (View Type) | Khi nào nên sử dụng | Tính năng nổi bật |
+| Bước | Thao tác thực hiện | Mô tả chi tiết |
 | :--- | :--- | :--- |
-| **Grid View (Bảng tính)** | Cần quản lý, đối soát dữ liệu hàng loạt, nhập liệu trực tiếp vào ô như Excel. | Chỉnh sửa trực tiếp ô (Inline Edit), xem chi tiết dòng (`RowDetailModal`), tính toán thống kê chân trang (Footer Summary). |
-| **Kanban View (Bảng thẻ)** | Quản lý quy trình làm việc nhiều bước (ví dụ: Tiếp nhận $\rightarrow$ Đang xử lý $\rightarrow$ Hoàn thành). | Kéo thả thẻ mượt mà giữa các cột phân nhóm, cấu hình trường hiển thị trên thẻ, gắn ảnh bìa trực quan. |
-| **Gallery View (Thư viện ảnh)** | Quản lý sản phẩm thương mại, danh mục nhân sự, tài sản hoặc portfolio có hình ảnh. | Thẻ trực quan với ảnh bìa nổi bật (chế độ Cover hoặc Fit), tùy chỉnh trường hiển thị dưới thẻ. |
-| **Calendar View (Lịch biểu)** | Lên lịch sự kiện, theo dõi hạn chót (Deadline), kế hoạch dự án, lịch bàn giao hợp đồng. | Chuyển đổi linh hoạt chế độ Năm/Tháng/Tuần/Ngày, điều hướng dải ngày, kéo thả dời lịch sự kiện. |
-| **Form View (Biểu mẫu công khai)** | Thu thập phản hồi khách hàng, đăng ký tư vấn, khảo sát dịch vụ mà không cần cấp quyền tài khoản. | Thiết kế biểu mẫu tùy biến logo/ảnh bìa, kéo thả câu hỏi, chia sẻ liên kết rút gọn, gắn mã UTM theo dõi nguồn. |
+| **1. Mở ngăn kéo Cấu hình View** | Tại danh sách mở rộng của bảng, nhấp vào nút <img src="https://api.iconify.design/lucide:plus.svg?color=%23ff3333" width="16" alt="" /> **Thêm view...**. | Ngăn kéo **Cấu hình View** xuất hiện từ cạnh phải màn hình. |
+| **2. Chọn loại View** | Tại mục **Loại View**, nhấp vào liên kết đỏ **Thay đổi** để chọn 1 trong 5 loại hiển thị:<br>• **Grid**: Bảng tính lưới hàng và cột truyền thống.<br>• **Kanban**: Bảng thẻ quy trình theo trạng thái.<br>• **Form**: Biểu mẫu thu thập dữ liệu.<br>• **Calendar**: Lịch biểu mốc thời gian.<br>• **Gallery**: Thư viện thẻ hình ảnh trực quan. | Xác định mô hình trực quan hóa dữ liệu phù hợp với nhu cầu. |
+| **3. Đặt tên và mô tả View** | • **Tên View**: Nhập tên gợi nhớ vào ô `Ví dụ: Tất cả khách hàng...`.<br>• Công tắc **Thêm mô tả**: Bật công tắc để nhập văn bản ghi chú về tiêu chí lọc của View này. | Giúp các thành viên trong nhóm hiểu rõ mục đích của View. |
+| **4. Cấu hình quyền quản trị View** | Chọn 1 trong 3 chế độ tại mục **Quyền cấu hình view**:<br>• **Cộng tác** (*Mặc định*): Editor, Admin và Owner đều có thể chỉnh sửa cấu hình view.<br>• **Đã khóa**: Chỉ người tạo view, Admin và Owner mới có quyền thay đổi bộ lọc, sắp xếp và cột.<br>• **Cá nhân**: Chỉ bạn, Admin và Owner mới nhìn thấy và thay đổi cấu hình view này. | Bảo vệ cấu hình hiển thị chuẩn mực của doanh nghiệp tránh bị sửa ngoài ý muốn. |
+| **5. Xác nhận khởi tạo** | Bấm nút xác nhận ở chân ngăn kéo. | View mới lập tức được tạo và hiển thị trong danh sách dạng xem của bảng. |
 
 ---
 
-### Giai đoạn 1 — Khởi tạo Dạng xem mới
+### Giai đoạn 2 — Vận hành và tùy biến chi tiết từng Dạng xem
 
-| Bước | Cách thực hiện |
-| :--- | :--- |
-| **1. Mở hộp thoại Tạo View** | Nhấp vào nút <img src="https://api.iconify.design/lucide:plus.svg?color=%23ff3333" width="16" alt="" /> trên thanh tab View để mở cửa sổ **Cấu hình View (CreateViewModal)**. |
-| **2. Chọn loại View và đặt tên** | • Chọn 1 trong 5 loại View: **Grid**, **Kanban**, **Gallery**, **Calendar** hoặc **Form**.<br>• **Tên View \***: Đặt tên gợi nhớ (ví dụ: `Đơn Hàng Chờ Xử Lý`, `Lịch Giao Hàng Tuần Này`).<br>• **Mô tả**: Nhập ghi chú về mục đích lọc hoặc phân loại của View này. |
-| **3. Cấu hình quyền truy cập View** | Chọn chế độ quản trị View:<br>• **Cộng tác (Collaborative)**: Mọi thành viên có quyền sửa cấu hình View.<br>• **Khóa (Locked)**: Chỉ người tạo và Quản trị viên mới được sửa bộ lọc và sắp xếp. |
-| **4. Xác nhận khởi tạo** | Bấm nút <img src="https://api.iconify.design/lucide:check.svg?color=%23ff3333" width="16" alt="" /> **(Tạo View)**. Giao diện sẽ tự động chuyển sang tab View mới. |
+#### 1. Dạng xem Bảng tính lưới (Grid View)
+
+Màn hình `Trang chủ > Database > View Details` cung cấp thanh công cụ mạnh mẽ phía trên bảng dữ liệu:
+
+| Công cụ Toolbar | Biểu tượng | Chức năng thao tác |
+| :--- | :--- | :--- |
+| **Thêm bản ghi** | <img src="https://api.iconify.design/lucide:plus.svg?color=%23ff3333" width="16" alt="" /> | Nút màu đỏ ở đầu bảng (hoặc dòng dấu cộng ở chân bảng) để thêm dòng mới vào bảng tính. |
+| **Hoàn tác & Làm lại** | <img src="https://api.iconify.design/lucide:undo.svg?color=%23ff3333" width="16" alt="" /> / <img src="https://api.iconify.design/lucide:redo.svg?color=%23ff3333" width="16" alt="" /> | Hủy bỏ hoặc khôi phục thao tác sửa dữ liệu ô vừa thực hiện. |
+| **Ẩn/Hiện trường** | <img src="https://api.iconify.design/lucide:list.svg?color=%23ff3333" width="16" alt="" /> | Kèm huy hiệu đỏ hiển thị số cột (ví dụ: `25`). Bấm để bật/tắt hiển thị từng cột riêng cho View này. |
+| **Bộ lọc (Filter)** | <img src="https://api.iconify.design/lucide:filter.svg?color=%23ff3333" width="16" alt="" /> | Thiết lập các điều kiện lọc dữ liệu kết hợp toán tử logic **Và (AND)** / **Hoặc (OR)**. |
+| **Sắp xếp (Sort)** | <img src="https://api.iconify.design/lucide:arrow-up-down.svg?color=%23ff3333" width="16" alt="" /> | Sắp xếp thứ tự bản ghi tăng dần (A → Z, 0 → 9) hoặc giảm dần theo một hoặc nhiều cột. |
+| **Gom nhóm (Group by)** | <img src="https://api.iconify.design/lucide:layers.svg?color=%23ff3333" width="16" alt="" /> | Gom các dòng bản ghi thành các nhóm có thanh tiêu đề riêng theo giá trị của cột chỉ định. |
+| **Chiều cao dòng (Row Height)** | <img src="https://api.iconify.design/lucide:rows.svg?color=%23ff3333" width="16" alt="" /> | Kèm huy hiệu trạng thái `1`. Cho phép chọn mức hiển thị dòng: Thấp, Trung bình, Cao, Rất cao. |
+| **Xóa bản ghi đã chọn** | <img src="https://api.iconify.design/lucide:trash-2.svg?color=%23ff3333" width="16" alt="" /> | Xóa nhanh các bản ghi đang được tích chọn qua hộp kiểm đầu dòng. |
+| **Tìm kiếm** | <img src="https://api.iconify.design/lucide:search.svg?color=%23ff3333" width="16" alt="" /> | Tìm nhanh từ khóa xuất hiện trên mọi ô tính của view. |
+| **Làm mới & Toàn màn hình** | <img src="https://api.iconify.design/lucide:rotate-cw.svg?color=%23ff3333" width="16" alt="" /> / <img src="https://api.iconify.design/lucide:maximize-2.svg?color=%23ff3333" width="16" alt="" /> | Tải lại dữ liệu và mở rộng bảng tính trọn vẹn màn hình trình duyệt. |
+
+##### Thao tác Hộp thoại Chi tiết dòng bản ghi
+Nhấp đúp chuột vào bất kỳ dòng nào hoặc bấm nút mở rộng để mở hộp thoại **Chi tiết dòng #{N}**:
+- **Cột bên trái**: Hiển thị toàn bộ các trường của bản ghi dạng biểu mẫu dọc, dễ dàng nhập liệu các văn bản dài.
+- **Cột bên phải**: Gồm 2 tab quan trọng:
+  - Tab **Bình luận**: Gửi nhận xét và trao đổi nội bộ về bản ghi này.
+  - Tab **Lịch sử thay đổi**: Ghi nhận chi tiết nhân sự thực hiện cập nhật và mốc thời gian (ví dụ: *"Bùi Mạnh Phi đã cập nhật bản ghi - 3 ngày trước"*).
+- **Cụm nút góc dưới bên trái**: Nút sao chép bản ghi <img src="https://api.iconify.design/lucide:copy.svg?color=%23ff3333" width="16" alt="" />, nút xem cấu trúc JSON `< / >`, và nút xóa bản ghi <img src="https://api.iconify.design/lucide:trash-2.svg?color=%23ff3333" width="16" alt="" />.
 
 ---
-
-### Giai đoạn 2 — Thiết lập và tùy biến chi tiết từng Dạng xem
-
-#### 1. Dạng xem Bảng tính (Grid View)
-
-- **Chỉnh sửa trực tiếp trên ô (Inline Cell Editing)**:
-  - Nhấp đúp chuột vào bất kỳ ô nào để nhập liệu ngay lập tức. Dùng phím `Enter` để lưu và xuống dòng dưới, phím `Tab` để chuyển sang ô bên phải, phím `Escape` để hủy.
-  - Hỗ trợ các trình biên tập thông minh tương ứng với từng kiểu dữ liệu: bảng chọn ngày cho kiểu Date, danh sách thả xuống có màu cho Select, trình tải tệp cho Attachment, cửa sổ chọn quan hệ cho Relation.
-- **Xem và sửa chi tiết bản ghi (Row Detail Modal)**:
-  - Nhấp vào biểu tượng mở rộng <img src="https://api.iconify.design/lucide:maximize-2.svg?color=%23ff3333" width="16" alt="" /> ở đầu mỗi dòng bản ghi.
-  - Cửa sổ hiển thị toàn bộ các trường của bản ghi dạng biểu mẫu dọc, cho phép nhập liệu thoải mái các văn bản dài, xem tệp đính kèm kích thước lớn và duyệt qua lại giữa các dòng bằng 2 nút <img src="https://api.iconify.design/lucide:chevron-left.svg?color=%23ff3333" width="16" alt="" /> **Trước** và <img src="https://api.iconify.design/lucide:chevron-right.svg?color=%23ff3333" width="16" alt="" /> **Sau**.
-- **Thanh tổng hợp chân trang (Footer Summary Bar)**:
-  - Dưới chân mỗi cột số, ngày tháng hoặc danh mục, nhấp vào ô tổng hợp để chọn hàm thống kê mong muốn:
-    - Nhóm đếm: `Số lượng (Count)`, `Trống (Empty)`, `Có dữ liệu (Filled)`, `Duy nhất (Unique)`.
-    - Nhóm tính toán: `Tổng (Sum)`, `Trung bình (Average)`, `Nhỏ nhất (Min)`, `Lớn nhất (Max)`, `Trung vị (Median)`, `Độ lệch chuẩn (Standard Deviation)`.
-    - Nhóm tỷ lệ: `Phần trăm có dữ liệu`, `Phần trăm duy nhất`, `Phần trăm đã chọn`.
 
 #### 2. Dạng xem Bảng thẻ quy trình (Kanban View)
 
-- **Cấu hình trường phân nhóm Stacks (`KanbanStackedByMenu`)**:
-  - Nhấp vào nút <img src="https://api.iconify.design/lucide:columns.svg?color=%23ff3333" width="16" alt="" /> **Gom thẻ theo** trên thanh công cụ.
-  - Chọn trường dữ liệu làm tiêu chí tạo các cột trạng thái (hỗ trợ các trường kiểu: `SELECT`, `MULTI_SELECT`, `USER`, `BOOLEAN`).
-  - Chọn trường ảnh bìa thẻ: Chọn trường `ATTACHMENT` hoặc `URL` (tùy chọn) để hiển thị hình ảnh minh họa trên đầu mỗi thẻ.
-- **Kéo thả và quản lý thẻ**:
-  - Kéo thả thẻ từ cột này sang cột khác để tự động cập nhật giá trị trường phân nhóm (ví dụ: kéo từ cột `Chờ Duyệt` sang `Đã Duyệt`).
-  - Bấm nút <img src="https://api.iconify.design/lucide:plus.svg?color=%23ff3333" width="16" alt="" /> **Thêm thẻ mới** ở cuối mỗi cột để tạo nhanh bản ghi mới thuộc đúng trạng thái của cột đó.
-- **Tùy biến hiển thị trường trên thẻ (`KanbanToolbarFieldMenu`)**:
-  - Bấm nút <img src="https://api.iconify.design/lucide:eye.svg?color=%23ff3333" width="16" alt="" /> **Tùy chỉnh thẻ** trên thanh công cụ. Bật/tắt các công tắc để quyết định những trường thông tin nào (ngày giao, số tiền, người phụ trách...) được lộ ra ngoài mặt thẻ.
+Giao diện `Trang chủ > Database > Kanban View` tổ chức các bản ghi thành các thẻ công việc di chuyển qua các cột trạng thái (Stacks):
 
-#### 3. Dạng xem Thư viện thẻ trực quan (Gallery View)
+| Thành phần | Đặc điểm & Thao tác |
+| :--- | :--- |
+| **Cột trạng thái (Stacks)** | Bao gồm cột mặc định `(Chưa phân loại)`, các cột theo giá trị trường lựa chọn và nút `+ New stack` ở bên phải để thêm cột trạng thái mới. |
+| **Menu trên tiêu đề cột (<img src="https://api.iconify.design/lucide:more-vertical.svg?color=%23ff3333" width="16" alt="" />)** | Bấm biểu tượng ba chấm trên đầu mỗi cột để chọn: `+ New record` (Thêm bản ghi mới vào cột này), `< Collapse stack` (Thu gọn cột), `Collapse all` (Thu gọn mọi cột), `Expand all` (Mở rộng mọi cột), `Delete stack` (Xóa cột). |
+| **Kéo thả thẻ** | Kéo thẻ từ cột này sang cột khác để tự động cập nhật giá trị trường trạng thái tương ứng. |
+| **Chân cột trạng thái** | Hiển thị nút `+ Thêm thẻ` và huy hiệu đếm tổng số thẻ có trong cột (ví dụ: `5 thẻ`, `1 thẻ`). |
 
-- **Cấu hình ảnh bìa và hiển thị thẻ (`GalleryToolbarCardMenu`)**:
-  - Nhấp vào nút <img src="https://api.iconify.design/lucide:image.svg?color=%23ff3333" width="16" alt="" /> **Ảnh bìa** trên thanh công cụ.
-  - Chọn cột ảnh bìa tại mục **Ảnh bìa** (chọn trường `ATTACHMENT` chứa ảnh sản phẩm/chân dung).
-  - Chọn chế độ khớp ảnh tại mục **Hiển thị ảnh**:
-    - `Lấp đầy khung (Cover)`: Ảnh phóng to vừa khít tỷ lệ khung thẻ.
-    - `Vừa khung (Fit/Contain)`: Giữ nguyên tỷ lệ gốc của bức ảnh, không bị cắt viền.
-- **Chọn các trường hiển thị dưới thẻ (`GalleryToolbarFieldMenu`)**:
-  - Bấm nút <img src="https://api.iconify.design/lucide:eye.svg?color=%23ff3333" width="16" alt="" /> **Trường hiển thị** $\rightarrow$ Tích chọn các thông tin muốn làm nổi bật (ví dụ: Tên sản phẩm, Giá bán, Tồn kho).
+---
+
+#### 3. Dạng xem Biểu mẫu thu thập dữ liệu (Form View)
+
+Giao diện `Trang chủ > Database > Form View` dùng để thiết kế và chia sẻ biểu mẫu nhập liệu công khai:
+
+| Khu vực | Thành phần giao diện | Chi tiết thiết lập |
+| :--- | :--- | :--- |
+| **Khung xem trước biểu mẫu (Ở giữa)** | Ảnh bìa (Banner) | Hiển thị hình ảnh nhận diện thương hiệu đầu trang form. |
+| | Tiêu đề & Các câu hỏi | Tiêu đề lớn của form và các khối nhập liệu tương ứng với từng cột dữ liệu trong bảng. |
+| **Panel cấu hình bên phải** | **Tab Cài đặt** | • **Tiêu đề lớn**: Nhập tên biểu mẫu (ví dụ: `Form đặt lịch khám Hoàng Anh PHCN`).<br>• **Ảnh Banner (URL)**: Dán link ảnh banner thương hiệu (để trống nếu dùng ảnh mặc định).<br>• **Mô tả / Phụ đề**: Nhập hướng dẫn điền form cho khách hàng.<br>• **Thông điệp gửi thành công**: Lời cảm ơn xuất hiện sau khi người dùng gửi form. |
+| | **Tab Trường dữ liệu** | • Kéo thả biểu tượng tay cầm để sắp xếp lại thứ tự xuất hiện các câu hỏi từ trên xuống dưới.<br>• Nhấp vào từng trường để đặt: **Nhãn tùy chỉnh**, **Placeholder (Gợi ý)**, **Văn bản trợ giúp** và công tắc **Bắt buộc nhập**. |
+| **Thanh công cụ Form** | Nút <img src="https://api.iconify.design/lucide:share-2.svg?color=%23ff3333" width="16" alt="" /> **Chia sẻ** | Mở liên kết công khai hoặc tải mã QR để người ngoài điền biểu mẫu mà không cần tài khoản đăng nhập. |
+
+---
 
 #### 4. Dạng xem Lịch biểu thời gian (Calendar View)
 
-- **Cấu hình dải ngày sự kiện (`CalendarRangeSettings`)**:
-  - Nhấp vào nút <img src="https://api.iconify.design/lucide:settings.svg?color=%23ff3333" width="16" alt="" /> **Cấu hình** trên thanh công cụ.
-  - Chọn **Trường ngày bắt đầu \***: Bắt buộc chọn một trường kiểu `DATE` hoặc `DATETIME`.
-  - Chọn **Trường ngày kết thúc (Tùy chọn)**: Dành cho các sự kiện kéo dài nhiều ngày (nếu để trống, sự kiện hiển thị dưới dạng một điểm mốc trong ngày).
-  - Chọn **Trường ảnh bìa**: Gắn hình ảnh đại diện cho ô sự kiện trên lịch.
-- **Chuyển đổi chế độ xem và điều hướng**:
-  - Chuyển đổi linh hoạt giữa 4 chế độ qua các nút bấm: <img src="https://api.iconify.design/lucide:calendar.svg?color=%23ff3333" width="16" alt="" /> **Năm (Year)**, **Tháng (Month)**, **Tuần (Week)**, **Ngày (Day)**.
-  - Bấm <img src="https://api.iconify.design/lucide:chevron-left.svg?color=%23ff3333" width="16" alt="" /> **Trước** / <img src="https://api.iconify.design/lucide:chevron-right.svg?color=%23ff3333" width="16" alt="" /> **Sau** để đổi mốc thời gian, hoặc bấm **Hôm nay** để quay về ngày hiện tại ngay lập tức.
-  - Kéo thả sự kiện sang một ô ngày khác để tự động dời mốc ngày trong cơ sở dữ liệu.
+Giao diện `Trang chủ > Database > Calendar View` trực quan hóa các bản ghi theo mốc ngày:
 
-#### 5. Dạng xem Biểu mẫu thu thập dữ liệu (Form View)
-
-- **Tùy biến nhận diện thương hiệu cho Form**:
-  - Nhấp vào tiêu đề để sửa **Tên biểu mẫu** và **Mô tả hướng dẫn**.
-  - Tải lên **Ảnh bìa biểu mẫu (Cover)** và **Ảnh Logo thương hiệu** để tăng độ uy tín chuyên nghiệp.
-- **Sắp xếp câu hỏi và thuộc tính trường**:
-  - Kéo thả các khối câu hỏi để sắp xếp lại thứ tự từ trên xuống dưới.
-  - Tại từng câu hỏi, bạn có thể:
-    - Bật/tắt công tắc <img src="https://api.iconify.design/lucide:check.svg?color=%23ff3333" width="16" alt="" /> **Bắt buộc**: Bắt buộc người gửi phải điền câu hỏi này.
-    - Bật/tắt công tắc <img src="https://api.iconify.design/lucide:eye-off.svg?color=%23ff3333" width="16" alt="" /> **Ẩn trường**: Ẩn trường khỏi biểu mẫu công khai nhưng vẫn gán sẵn giá trị mặc định ngầm định.
-- **Cấu hình phản hồi sau khi hoàn tất**:
-  - Nhập **Thông báo cảm ơn** xuất hiện sau khi người dùng bấm nút gửi form.
-  - Nhập **Đường dẫn chuyển hướng (Redirect URL)** nếu muốn trình duyệt tự động chuyển sang trang cảm ơn hoặc website của bạn sau khi gửi dữ liệu.
-  - Bật tùy chọn **Cho phép gửi phản hồi khác** nếu người dùng có nhu cầu gửi nhiều lần.
-
----
-
-### Giai đoạn 3 — Sử dụng bộ công cụ Lọc, Sắp xếp và Tô màu dữ liệu
-
-| Công cụ | Cách thức thiết lập |
+| Thành phần | Đặc điểm & Thao tác |
 | :--- | :--- |
-| **Bộ lọc (Filter)** | Bấm nút <img src="https://api.iconify.design/lucide:filter.svg?color=%23ff3333" width="16" alt="" /> **Lọc** trên thanh công cụ:<br>• Bấm **+ Thêm điều kiện**: Chọn `Cột` $\rightarrow$ Chọn `Toán tử` (bằng, chứa, bắt đầu bằng, rỗng...) $\rightarrow$ Nhập `Giá trị`.<br>• Kết hợp nhiều điều kiện bằng logic **VÀ (AND)** hoặc **HOẶC (OR)**.<br>• **Tạo bộ lọc bằng AI**: Nhấp vào biểu tượng <img src="https://api.iconify.design/lucide:sparkles.svg?color=%23ff3333" width="16" alt="" /> và gõ yêu cầu tự nhiên (ví dụ: `Lọc đơn hàng hoàn thành trong tuần này có giá trị trên 5 triệu`), AI sẽ tự động sinh quy tắc lọc chính xác. |
-| **Sắp xếp (Sort)** | Bấm nút <img src="https://api.iconify.design/lucide:arrow-up-down.svg?color=%23ff3333" width="16" alt="" /> **Sắp xếp**:<br>• Bấm **+ Thêm quy tắc sắp xếp**: Chọn cột và chiều sắp xếp (Tăng dần `A $\rightarrow$ Z`, `0 $\rightarrow$ 9` hoặc Giảm dần `Z $\rightarrow$ A`, `9 $\rightarrow$ 0`).<br>• Có thể thêm nhiều tầng sắp xếp ưu tiên từ trên xuống dưới. |
-| **Gom nhóm (Group by)** | Bấm nút <img src="https://api.iconify.design/lucide:layers.svg?color=%23ff3333" width="16" alt="" /> **Gom nhóm**:<br>• Chọn cột muốn gom nhóm (ví dụ: `Phòng Ban` hoặc `Trạng Thái`). Toàn bộ bảng tính sẽ được chia thành các nhóm có thanh tiêu đề riêng, hiển thị số lượng bản ghi và cho phép thu gọn/mở rộng từng nhóm. |
-| **Tô màu dòng (Row Color Rules)** | Bấm nút <img src="https://api.iconify.design/lucide:palette.svg?color=%23ff3333" width="16" alt="" /> **Màu sắc** $\rightarrow$ Thêm quy tắc màu:<br>• Thiết lập điều kiện (ví dụ: `Nếu [Trạng thái] = "Quá Hạn"`).<br>• Chọn màu nền tương ứng (ví dụ: màu đỏ cảnh báo). Toàn bộ dòng thỏa mãn điều kiện sẽ được tự động đổi màu nổi bật. |
-
----
-
-### Giai đoạn 4 — Chia sẻ View và Biểu mẫu công khai
-
-| Bước | Cách thực hiện |
-| :--- | :--- |
-| **1. Mở hộp thoại Chia sẻ** | Bấm nút <img src="https://api.iconify.design/lucide:share-2.svg?color=%23ff3333" width="16" alt="" /> **(Chia sẻ View)** trên thanh công cụ phía trên. |
-| **2. Bật quyền chia sẻ công khai** | Bật nút gạt **Kích hoạt liên kết công khai**. Hệ thống sẽ cấp phát một mã UUID an toàn không thể đoán trước (`/form/:sharedViewUuid`). |
-| **3. Sử dụng Link rút gọn & Mã QR** | • **Liên kết rút gọn**: Sao chép đường dẫn dạng ngắn gọn (`/s/:code`) cực kỳ tiện lợi để gửi qua tin nhắn SMS, Zalo hoặc mạng xã hội.<br>• **Mã QR Code**: Bấm nút <img src="https://api.iconify.design/lucide:qr-code.svg?color=%23ff3333" width="16" alt="" /> **Tải mã QR** để in ấn lên tờ rơi, bàn ăn hoặc bảng thông báo. |
-| **4. Gắn tham số chiến dịch tiếp thị (UTM Presets)** | Mở mục **Cấu hình UTM Campaign**:<br>• Điền các tham số: `utm_source` (ví dụ: `facebook`), `utm_medium` (`cpc`), `utm_campaign` (`khuyen_mai_tet`).<br>• Liên kết tạo ra sẽ tự động đính kèm các tham số này, giúp theo dõi chính xác nguồn dẫn dữ liệu khi người dùng điền biểu mẫu. |
-| **5. Xem mã cURL tích hợp ngoài** | Bấm vào nút <img src="https://api.iconify.design/lucide:code.svg?color=%23ff3333" width="16" alt="" /> **(Xem API cURL)** để lấy đoạn mã HTTP POST mẫu tích hợp form trực tiếp từ mã nguồn website ngoài vào bảng dữ liệu RedAI. |
+| **Cụm điều hướng thời gian** | • Nút **Hôm nay**: Quay nhanh về ngày hiện tại.<br>• Nút mũi tên `<` và `>`: Di chuyển qua lại giữa các tháng hoặc tuần.<br>• Hiển thị mốc tháng năm đang xem (ví dụ: `Tháng 10, 2026`). |
+| **Bộ chuyển đổi dải xem (Scope)** | Chuyển đổi linh hoạt qua 4 nút bấm: **Năm** | **Tháng** (*Mặc định*) | **Tuần** | **Ngày**. |
+| **Thanh công cụ Lịch** | Gồm nút Lọc (<img src="https://api.iconify.design/lucide:filter.svg?color=%23ff3333" width="16" alt="" />), Ẩn/Hiện trường (<img src="https://api.iconify.design/lucide:list.svg?color=%23ff3333" width="16" alt="" />), Làm mới (<img src="https://api.iconify.design/lucide:rotate-cw.svg?color=%23ff3333" width="16" alt="" />), Cài đặt trường ngày bắt đầu/kết thúc (<img src="https://api.iconify.design/lucide:settings.svg?color=%23ff3333" width="16" alt="" />) và Toàn màn hình. |
 
 ---
 
 ## Kiểm tra kết quả
 
-Sau khi thiết lập các Dạng xem và bộ công cụ hiển thị, bạn kiểm tra lại:
+Sau khi hoàn thiện thiết lập các Dạng xem, người dùng kiểm tra lại:
 
-1. **Chuyển đổi mượt mà**: Nhấp lần lượt qua các tab View, dữ liệu hiển thị tức thì theo đúng cấu trúc của từng loại (Grid hiển thị dạng lưới bảng tính, Kanban hiển thị các cột trạng thái, Gallery hiển thị thẻ có ảnh bìa).
-2. **Bộ lọc & Sắp xếp**: Dữ liệu chỉ hiển thị các bản ghi khớp với điều kiện lọc đã chọn; khi sửa hoặc thêm bản ghi mới, các quy tắc sắp xếp và tô màu dòng lập tức có hiệu lực tự động.
-3. **Liên kết chia sẻ & Biểu mẫu**: Sao chép liên kết rút gọn `/s/:code`, mở thử trên cửa sổ trình duyệt ẩn danh (không đăng nhập) để kiểm chứng biểu mẫu hiển thị đầy đủ tiêu đề, logo và cho phép gửi dữ liệu thành công vào bảng.
+| Hạng mục kiểm tra | Tiêu chí đạt chuẩn |
+| :--- | :--- |
+| **1. Khả năng chuyển đổi View** | Bấm chuyển đổi giữa các tab View, dữ liệu phản hồi mượt mà theo đúng đặc trưng trực quan của từng dạng (lưới, cột thẻ, biểu mẫu, lịch biểu). |
+| **2. Hiệu lực bộ lọc & Gom nhóm** | Bản ghi tự động được gom nhóm chính xác theo trường chỉ định và chỉ hiển thị các dữ liệu thỏa mãn điều kiện lọc. |
+| **3. Nhật ký sửa đổi (Chi tiết dòng)** | Khi có thay đổi dữ liệu trong ô tính, kiểm tra tab Lịch sử thay đổi trong cửa sổ Chi tiết dòng thấy ghi nhận đúng tên nhân sự và thời điểm cập nhật. |
 
 ---
 
 ## Hướng dẫn thao tác qua trợ lý ảo AI Agent
 
+Bạn có thể yêu cầu trợ lý ảo AI Agent tự động khởi tạo các Dạng xem (Grid, Kanban, Form, Calendar, Gallery), tùy biến bộ lọc đa điều kiện, thiết lập sắp xếp, gom nhóm dòng và quản lý dữ liệu bản ghi thông qua bộ công cụ quản trị Database.
+
 ### Chuẩn bị kỹ năng (Skill) cho trợ lý ảo AI Agent
 
-Để trợ lý ảo AI Agent có thể tự động tạo các dạng xem, cấu hình bộ lọc nâng cao và trích xuất đường dẫn chia sẻ, bạn cần đảm bảo Agent đã được trang bị Kỹ năng (Skill) sau:
+- **Kỹ năng (Skill) cần trang bị**: `RedAI - Module - Database` (ID: `65f9c362-0a8b-4ce6-9ba0-d29375b4cea6`)
+- **Bộ công cụ (Tool Suite) đi kèm**: `RedAI - Module - Database` (ID: `eb8a7504-5844-4e6e-ba7f-7645f104c0af`)
+- **Quyền hạn tài khoản**: Tài khoản người dùng có quyền quản trị cơ sở dữ liệu trong Workspace (Member, Editor, Admin hoặc Owner).
 
-| Thông số cấu hình | Giá trị chính xác |
-| :--- | :--- |
-| **Tên Kỹ năng (Skill Name)** | `RedAI - Module - Database` |
-| **Mã định danh Kỹ năng (Skill ID)** | `65f9c362-0a8b-4ce6-9ba0-d29375b4cea6` |
-| **Bộ công cụ (Tool Suite)** | `RedAI - Module - Database` |
-| **Mã định danh Bộ công cụ (Tool Suite ID)** | `eb8a7504-5844-4e6e-ba7f-7645f104c0af` |
-| **Quyền tài khoản yêu cầu** | Workspace Member, Editor, Admin hoặc Owner |
+### Bảng liên kết thao tác giao diện và công cụ của trợ lý ảo AI Agent
 
----
-
-### Bảng ánh xạ giao diện người dùng sang công cụ AI Agent
-
-| Tác vụ trên Giao diện | Tên Tool tương ứng | Ý nghĩa & Tham số chính |
+| Thao tác trên giao diện | Công cụ trợ lý ảo AI Agent sử dụng | Nhiệm vụ của công cụ |
 | :--- | :--- | :--- |
-| Bấm **+ Thêm View mới** trên thanh tab | `view_createView` | Khởi tạo dạng xem mới (`tableId`, `title`, `type`: GRID/KANBAN/GALLERY/CALENDAR/FORM). |
-| Xem danh sách các View của một bảng | `view_listViews` | Lấy danh sách toàn bộ các View và cấu hình của bảng (`tableId`). |
-| Chỉnh sửa bộ lọc, sắp xếp, ẩn hiện cột của View | `view_updateView` | Cập nhật cấu hình hiển thị của View (`tableId`, `viewId`, `filters`, `sorts`, `hiddenColumns`). |
-| Đổi tên View hoặc khóa cấu hình View | `view_updateView` | Thay đổi tên hiển thị hoặc bật cờ `isLocked: true` (`tableId`, `viewId`, `title`, `isLocked`). |
-| Bấm **Xóa View** trên menu ngữ cảnh | `view_deleteView` | Xóa một View khỏi bảng (`tableId`, `viewId`). |
-| Bấm **Nhân bản View** | `view_duplicateView` | Nhân bản toàn bộ cấu hình của một View sang View mới (`tableId`, `viewId`). |
-| Bật **Chia sẻ View** và lấy link rút gọn | `view_createSharedLink` | Kích hoạt liên kết công khai hoặc rút gọn cho View (`tableId`, `viewId`, `allowSubmit`). |
+| Nhấp vào dòng bảng để xem danh sách các Dạng xem | `listTableViews` | Liệt kê toàn bộ các Dạng xem (Views) hiện có của bảng kèm loại hiển thị và cấu hình. |
+| Bấm <img src="https://api.iconify.design/lucide:plus.svg?color=%23ff3333" width="16" alt="" /> **Thêm view...** $\rightarrow$ Chọn loại **Grid** | `createGridView` (hoặc `createTableView`) | Khởi tạo Dạng xem bảng tính lưới mới với tên và mô tả chỉ định. |
+| Bấm **Thêm view...** $\rightarrow$ Chọn loại **Kanban** | `createKanbanView` | Khởi tạo Dạng xem bảng thẻ Kanban với trường phân nhóm cột trạng thái (Stacks). |
+| Bấm **Thêm view...** $\rightarrow$ Chọn loại **Form** | `createFormView`, `updateFormView` | Khởi tạo hoặc cập nhật Dạng xem biểu mẫu thu thập dữ liệu công khai kèm tiêu đề và ảnh bìa. |
+| Bấm **Thêm view...** $\rightarrow$ Chọn loại **Calendar** hoặc **Gallery** | `createCalendarView`, `createGalleryView` | Khởi tạo Dạng xem lịch biểu mốc ngày hoặc Dạng xem thư viện thẻ hình ảnh trực quan. |
+| Bấm menu ba chấm trên dòng View $\rightarrow$ <img src="https://api.iconify.design/lucide:copy.svg?color=%23ff3333" width="16" alt="" /> **Nhân bản View** | `duplicateTableView` | Sao chép một Dạng xem hiện có sang View mới, kế thừa trọn vẹn bộ lọc và cách sắp xếp. |
+| Bấm menu ba chấm trên dòng View $\rightarrow$ <img src="https://api.iconify.design/lucide:trash-2.svg?color=%23ff3333" width="16" alt="" /> **Xóa view** | `deleteTableView` | Xóa một Dạng xem khỏi danh sách dạng xem của bảng. |
+| Thanh công cụ Toolbar $\rightarrow$ <img src="https://api.iconify.design/lucide:list.svg?color=%23ff3333" width="16" alt="" /> **Ẩn/Hiện trường** | `updateViewColumns` | Điều chỉnh ẩn/hiện (`show`), thứ tự (`order`), độ rộng cột (`width`) và căn lề (`align`) theo `fieldName`. |
+| Thanh công cụ Toolbar $\rightarrow$ <img src="https://api.iconify.design/lucide:filter.svg?color=%23ff3333" width="16" alt="" /> **Bộ lọc (Filter)** | `setFiltersView`, `listFilters` | Thiết lập danh sách các điều kiện lọc dữ liệu kết hợp logic **Và (AND)** / **Hoặc (OR)** cho View. |
+| Thanh công cụ Toolbar $\rightarrow$ <img src="https://api.iconify.design/lucide:arrow-up-down.svg?color=%23ff3333" width="16" alt="" /> **Sắp xếp (Sort)** | `setOrdersView`, `listSorts` | Thiết lập thứ tự sắp xếp tăng dần hoặc giảm dần theo một hoặc nhiều cột. |
+| Thanh công cụ Toolbar $\rightarrow$ <img src="https://api.iconify.design/lucide:layers.svg?color=%23ff3333" width="16" alt="" /> **Gom nhóm (Group by)** | `setGroupBy`, `getGroupBy` | Thiết lập trường dữ liệu dùng để gom nhóm các dòng trong Grid View. |
+| Thiết lập điều kiện đổi màu dòng dữ liệu | `upsertRowColor`, `getRowColor` | Đặt quy tắc tô màu nền cho dòng bản ghi thỏa mãn điều kiện chỉ định. |
+| Bấm <img src="https://api.iconify.design/lucide:plus.svg?color=%23ff3333" width="16" alt="" /> **Thêm bản ghi** hoặc sửa nội dung ô tính | `createRecords`, `updateRecords`, `listRecords` | Thêm mới, cập nhật hoặc truy vấn danh sách bản ghi dữ liệu hiển thị trong View. |
 
----
-
-### Khung lệnh (Prompt) mẫu chuẩn 4 phần cho AI Agent
-
-Dưới đây là mẫu câu lệnh hoàn chỉnh để ra lệnh cho AI Agent tự động khởi tạo và cấu hình chuyên sâu một Dạng xem Kanban cho bảng dữ liệu:
+### Câu lệnh mẫu (Prompt mẫu)
 
 ```text
-[MỤC TIÊU]
-Khởi tạo một Dạng xem Kanban mới mang tên "Tiến Độ Đơn Hàng" cho bảng `tbl_orders_2026`, phân nhóm theo cột "Trạng Thái" và chỉ lọc các đơn hàng phát sinh trong tháng hiện tại.
+Hãy giúp tôi thiết lập một Dạng xem Kanban mới và cấu hình bộ lọc nâng cao trên RedAI Database theo quy trình chuẩn:
 
-[DỮ LIỆU ĐẦU VÀO]
-- Mã bảng dữ liệu: `tbl_orders_2026`
-- Loại Dạng xem: KANBAN
-- Tên View mới: "Tiến Độ Đơn Hàng"
-- Trường phân nhóm Stacks: Cột "Trạng Thái" (`col_status_id`)
-- Trường ảnh bìa Cover: Cột "Ảnh Sản Phẩm" (`col_product_img_id`)
-- Bộ lọc áp dụng: Điều kiện `[Ngày Tạo] >= "2026-10-01"` kết hợp logic AND với `[Xóa Tạm Thời] = false`
+1. Bối cảnh và Mục tiêu:
+- Tôi cần tạo một Dạng xem Kanban để theo dõi tiến độ xử lý đơn hàng theo từng trạng thái, chỉ hiển thị các đơn phát sinh có giá trị trên 500.000 VNĐ và sắp xếp giảm dần theo ngày đặt.
 
-[QUY TRÌNH THỰC THI]
-1. Gọi tool `view_createView` với `type: "KANBAN"` và `title: "Tiến Độ Đơn Hàng"`.
-2. Lấy `viewId` vừa nhận được, gọi tool `view_updateView` để cấu hình trường gom nhóm `groupFieldId: "col_status_id"`, `coverImageFieldId: "col_product_img_id"`.
-3. Bổ sung cấu trúc bộ lọc `filters` vào cùng lệnh `view_updateView` để giới hạn các đơn hàng trong tháng.
-4. Kiểm tra cấu hình trả về để xác nhận View đã lưu trữ đầy đủ.
+2. Dữ liệu cung cấp:
+- Tên bảng: "Đơn Đặt Hàng"
+- Tên View mới: "Tiến Độ Đơn Trọng Điểm"
+- Loại View: KANBAN
+- Cột phân nhóm trạng thái (Stacks): "Trạng Thái"
+- Điều kiện lọc: Cột "Tổng Tiền" >= 500000
+- Sắp xếp: Cột "Ngày Đặt" giảm dần (desc)
 
-[TIÊU CHÍ HOÀN THÀNH]
-- Tab View Kanban "Tiến Độ Đơn Hàng" xuất hiện trên giao diện bảng `tbl_orders_2026`.
-- Bảng hiển thị các cột trạng thái tương ứng với các giá trị của cột "Trạng Thái".
-- Trả về mã `viewId` và liên kết truy cập trực tiếp đến Dạng xem này.
+3. Các bước yêu cầu thực hiện:
+- Bước 1: Gọi tool listTableViews của bảng "Đơn Đặt Hàng" để kiểm tra danh sách view hiện có.
+- Bước 2: Gọi tool createKanbanView với tên "Tiến Độ Đơn Trọng Điểm" và chỉ định trường gom nhóm là "Trạng Thái".
+- Bước 3: Gọi tool setFiltersView trên view vừa tạo với điều kiện trường "Tổng Tiền" có toán tử lớn hơn hoặc bằng giá trị 500000.
+- Bước 4: Gọi tool setOrdersView để sắp xếp cột "Ngày Đặt" theo chiều giảm dần (desc).
+- Bước 5: Gọi tool getTableView để xác nhận toàn bộ cấu hình lọc và sắp xếp của View mới đã được lưu chuẩn xác.
+
+4. Yêu cầu phản hồi:
+- Báo cáo lại tên View, loại hiển thị, trường phân nhóm Kanban và các điều kiện lọc/sắp xếp đã thiết lập thành công.
 ```
 
----
+### Kiểm tra kết quả sau khi ra lệnh cho trợ lý ảo AI Agent
 
-### Bảng kiểm tra chéo 2 chiều (UI $\leftrightarrow$ AI Agent)
+| Cách kiểm tra | Thao tác thực hiện |
+| :--- | :--- |
+| **Cách 1 — Kiểm tra trực tiếp trên giao diện** | Truy cập `Trang chủ > Database`, nhấp vào bảng **Đơn Đặt Hàng**, nhấp vào tab View mới **Tiến Độ Đơn Trọng Điểm**; kiểm tra màn hình hiển thị dạng bảng Kanban với các cột trạng thái tương ứng và các thẻ đơn hàng thỏa mãn điều kiện lọc. |
+| **Cách 2 — Yêu cầu trợ lý ảo AI Agent kiểm tra lại** | Gửi câu lệnh: *"Hãy gọi `getTableView` và `listFilters` cho view 'Tiến Độ Đơn Trọng Điểm' của bảng 'Đơn Đặt Hàng' để kiểm tra lại các điều kiện hiển thị."* |
+
+### Bảng kiểm tra chéo 2 chiều (UI ↔ AI Agent)
 
 | Hành động thực hiện trên Giao diện UI | Kết quả kiểm tra xác thực bằng Tool Agent |
 | :--- | :--- |
-| Tạo View mới hoặc đổi bộ lọc/sắp xếp trên thanh công cụ | Gọi `view_getViewDetail` thấy mảng `filters` và `sorts` lưu đúng cấu hình vừa chọn. |
-| Bật liên kết chia sẻ công khai và lấy short link | Gọi `view_getViewDetail` thấy trường `sharedLink` và mã `shortCode` hoạt động. |
-| Kéo thẻ Kanban sang cột mới trên giao diện | Gọi `record_getRecordDetail` thấy giá trị của trường trạng thái đã được cập nhật tương ứng. |
+| Tạo View mới hoặc đổi tên View trên giao diện | Gọi `listTableViews` thấy xuất hiện View mới với đúng tên và loại hiển thị tương ứng. |
+| Thiết lập bộ lọc trên thanh Toolbar (Filter) | Gọi `listFilters` thấy mảng các điều kiện lọc lưu đúng tên trường và toán tử. |
+| Kéo đổi thứ tự cột hoặc ẩn bớt cột | Gọi `getTableView` thấy cấu hình cột trong `updateViewColumns` phản ánh đúng trạng thái `show: false`. |
+| Kéo thẻ Kanban sang cột trạng thái khác | Gọi `getRecord` thấy giá trị trường trạng thái của bản ghi đã được cập nhật sang nhãn cột mới. |
 | **Lệnh thực hiện bởi AI Agent qua Tool** | **Vị trí và dấu hiệu kiểm tra trên Giao diện UI** |
-| Agent gọi `view_createView` tạo View mới | Tải lại trang, thanh tab View xuất hiện thêm tab mới với biểu tượng tương ứng với loại View. |
-| Agent gọi `view_updateView` cấu hình bộ lọc | Mở View trên trình duyệt, dữ liệu lập tức được lọc và nút Lọc hiển thị số điều kiện đang áp dụng. |
-| Agent gọi `view_createSharedLink` tạo link công khai | Mở hộp thoại Chia sẻ View trên giao diện, thấy công tắc công khai đang bật kèm URL và mã QR. |
+| Agent gọi `createKanbanView` tạo view Kanban | Mở bảng dữ liệu, tab View mới xuất hiện với biểu tượng bảng thẻ Kanban. |
+| Agent gọi `setFiltersView` áp dụng bộ lọc | Mở View trên màn hình, nút Lọc hiển thị huy hiệu số lượng điều kiện lọc đang có hiệu lực. |
+| Agent gọi `createRecords` thêm bản ghi | Bảng tính lập tức xuất hiện dòng bản ghi mới với dữ liệu các ô tính chuẩn xác. |
